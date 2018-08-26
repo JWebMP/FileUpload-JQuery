@@ -33,6 +33,7 @@ module com.jwebmp.plugins.blueimp.fileupload {
 	requires commons.fileupload;
 	requires tika.core;
 	requires com.jwebmp.plugins.blueimp.gallery;
+	requires com.jwebmp.interception;
 
 	provides IAngularConfiguration with AngularFileUploadDataBinderConfigurationBase;
 	provides IAngularController with BlueImpFileDestroyController;

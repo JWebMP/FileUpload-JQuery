@@ -20,7 +20,7 @@ package com.jwebmp.plugins.blueimp.fileupload.parts;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.*;
 import com.jwebmp.core.base.html.inputs.InputFileType;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 
 import javax.validation.constraints.NotNull;
 
@@ -43,7 +43,7 @@ public class BlueImpUploadButtonBar<J extends BlueImpUploadButtonBar<J>>
 	@NotNull
 	public J addAddButton(String displayClass, String iconClass, String label, boolean multiple)
 	{
-		Span<GlobalChildren, ?, ?> span = new Span();
+		Span<IComponentHierarchyBase, ?, ?> span = new Span();
 
 		if (displayClass != null && !displayClass.isEmpty())
 		{

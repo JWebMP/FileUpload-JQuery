@@ -22,6 +22,7 @@ import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.base.servlets.JWDefaultServlet;
 import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.guicedinjection.pairing.Pair;
+import com.jwebmp.interception.services.DataCallIntercepter;
 import com.jwebmp.logger.LogFactory;
 import com.jwebmp.plugins.blueimp.fileupload.AngularFileUploadBinderGuiceSiteBinder;
 import com.jwebmp.plugins.blueimp.fileupload.intercepters.OnDeleteFileInterceptor;
@@ -52,6 +53,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
+import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
 /**
  * The default file receiving servlet
@@ -93,7 +97,8 @@ public class AngularFileServlet
 			return;
 		}
 
-		intercept();
+		GuiceContext.get(DataCallInterceptorKey)
+		            .forEach(DataCallIntercepter::intercept);
 
 		String rangeString = request.getHeader("Content-Range");
 		String rangeUpTo = rangeString.substring(rangeString.indexOf('-') + 1, rangeString.indexOf('/'));
@@ -138,8 +143,8 @@ public class AngularFileServlet
 	@Override
 	public void perform()
 	{
-		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
-		HttpServletResponse response = GuiceContext.get(HttpServletResponse.class);
+		HttpServletRequest request = GuiceContext.get(HttpServletRequestKey);
+		HttpServletResponse response = GuiceContext.get(HttpServletResponseKey);
 
 		if (request.getParameter(AngularFileServlet.getFileMethod) != null && !request.getParameter(AngularFileServlet.getFileMethod)
 		                                                                              .isEmpty())
