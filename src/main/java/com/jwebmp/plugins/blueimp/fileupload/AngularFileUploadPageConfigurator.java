@@ -52,6 +52,10 @@ import javax.validation.constraints.NotNull;
 public class AngularFileUploadPageConfigurator
 		implements IPageConfigurator
 {
+	/**
+	 * If this configurator is enabled
+	 */
+	private static boolean enabled = true;
 	private static BlueImpFileUploadDefaultOptions defaultOptions;
 	private static boolean renderJqueryUI;
 	/**
@@ -65,6 +69,31 @@ public class AngularFileUploadPageConfigurator
 	public AngularFileUploadPageConfigurator()
 	{
 		//Nothing Needed
+	}
+
+	/**
+	 * Method isEnabled returns the enabled of this AngularAnimatedChangePageConfigurator object.
+	 * <p>
+	 * If this configurator is enabled
+	 *
+	 * @return the enabled (type boolean) of this AngularAnimatedChangePageConfigurator object.
+	 */
+	public static boolean isEnabled()
+	{
+		return AngularFileUploadPageConfigurator.enabled;
+	}
+
+	/**
+	 * Method setEnabled sets the enabled of this AngularAnimatedChangePageConfigurator object.
+	 * <p>
+	 * If this configurator is enabled
+	 *
+	 * @param mustEnable
+	 * 		the enabled of this AngularAnimatedChangePageConfigurator object.
+	 */
+	public static void setEnabled(boolean mustEnable)
+	{
+		AngularFileUploadPageConfigurator.enabled = mustEnable;
 	}
 
 	/**
@@ -191,6 +220,12 @@ public class AngularFileUploadPageConfigurator
 			                                                                                     .setSortOrder(227));
 		}
 		return page;
+	}
+
+	@Override
+	public boolean enabled()
+	{
+		return AngularFileUploadPageConfigurator.enabled;
 	}
 
 	private void registerModules(Page page)
