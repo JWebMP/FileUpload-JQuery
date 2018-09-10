@@ -22,6 +22,7 @@ import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.base.servlets.JWDefaultServlet;
 import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.guicedinjection.pairing.Pair;
+import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.DataCallIntercepter;
 import com.jwebmp.logger.LogFactory;
 import com.jwebmp.plugins.blueimp.fileupload.AngularFileUploadBinderGuiceSiteBinder;
@@ -54,7 +55,6 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
 import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
 /**
@@ -143,8 +143,8 @@ public class AngularFileServlet
 	@Override
 	public void perform()
 	{
-		HttpServletRequest request = GuiceContext.get(HttpServletRequestKey);
-		HttpServletResponse response = GuiceContext.get(HttpServletResponseKey);
+		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
+		HttpServletResponse response = GuiceContext.get(GuicedServletKeys.getHttpServletResponseKey());
 
 		if (request.getParameter(AngularFileServlet.getFileMethod) != null && !request.getParameter(AngularFileServlet.getFileMethod)
 		                                                                              .isEmpty())
