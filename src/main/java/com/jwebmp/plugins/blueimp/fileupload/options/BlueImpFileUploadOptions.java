@@ -21,7 +21,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 
-import javax.activation.MimeType;
 import javax.validation.constraints.NotNull;
 import java.nio.charset.Charset;
 import java.util.regex.Pattern;
@@ -104,8 +103,10 @@ public class BlueImpFileUploadOptions<J extends BlueImpFileUploadOptions<J>>
 	@JsonRawValue
 	private String disableImageResize;
 	private Float imageQuality;
-	@JsonSerialize(contentUsing = ToStringSerializer.class)
-	private MimeType imageType;
+	/**
+	 * The image MIME Type
+	 */
+	private String imageType;
 	private Integer previewMaxWidth;
 	private Integer previewMaxHeight;
 	private Integer previewMinWidth;
@@ -753,14 +754,14 @@ public class BlueImpFileUploadOptions<J extends BlueImpFileUploadOptions<J>>
 		return (J) this;
 	}
 
-	public MimeType getImageType()
+	public String getImageType()
 	{
 		return imageType;
 	}
 
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J setImageType(MimeType imageType)
+	public J setImageType(String imageType)
 	{
 		this.imageType = imageType;
 		return (J) this;
