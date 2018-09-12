@@ -42,14 +42,14 @@ import javax.validation.constraints.NotNull;
 		pluginSubtitle = "A File Uploader for JWebSwing",
 		pluginGitUrl = "https://github.com/blueimp/jQuery-File-Upload",
 		pluginSourceUrl = "https://github.com/blueimp/jQuery-File-Upload",
-		pluginWikiUrl = "https://github.com/GedMarc/AngularFileUploadPageConfigurator/wiki",
+		pluginWikiUrl = "https://github.com/GedMarc/BlueImpFileUploadPageConfigurator/wiki",
 		pluginOriginalHomepage = "https://github.com/blueimp/jQuery-File-Upload",
-		pluginDownloadUrl = "https://sourceforge.net/projects/jwebswing/files/plugins/AngularFileUploadPageConfigurator.jar/download",
+		pluginDownloadUrl = "https://sourceforge.net/projects/jwebswing/files/plugins/BlueImpFileUploadPageConfigurator.jar/download",
 		pluginIconUrl = "",
 		pluginIconImageUrl = "",
 		pluginLastUpdatedDate = "2017/09/18")
 @Singleton
-public class AngularFileUploadPageConfigurator
+public class BlueImpFileUploadPageConfigurator
 		implements IPageConfigurator
 {
 	/**
@@ -66,7 +66,7 @@ public class AngularFileUploadPageConfigurator
 	/**
 	 * Configures the page for this component
 	 */
-	public AngularFileUploadPageConfigurator()
+	public BlueImpFileUploadPageConfigurator()
 	{
 		//Nothing Needed
 	}
@@ -80,7 +80,7 @@ public class AngularFileUploadPageConfigurator
 	 */
 	public static boolean isEnabled()
 	{
-		return AngularFileUploadPageConfigurator.enabled;
+		return BlueImpFileUploadPageConfigurator.enabled;
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class AngularFileUploadPageConfigurator
 	 */
 	public static void setEnabled(boolean mustEnable)
 	{
-		AngularFileUploadPageConfigurator.enabled = mustEnable;
+		BlueImpFileUploadPageConfigurator.enabled = mustEnable;
 	}
 
 	/**
@@ -104,11 +104,11 @@ public class AngularFileUploadPageConfigurator
 	@NotNull
 	public static BlueImpFileUploadDefaultOptions getDefaultOptions()
 	{
-		if (AngularFileUploadPageConfigurator.defaultOptions == null)
+		if (BlueImpFileUploadPageConfigurator.defaultOptions == null)
 		{
-			AngularFileUploadPageConfigurator.defaultOptions = new BlueImpFileUploadDefaultOptions();
+			BlueImpFileUploadPageConfigurator.defaultOptions = new BlueImpFileUploadDefaultOptions();
 		}
-		return AngularFileUploadPageConfigurator.defaultOptions;
+		return BlueImpFileUploadPageConfigurator.defaultOptions;
 	}
 
 	/**
@@ -118,17 +118,17 @@ public class AngularFileUploadPageConfigurator
 	 */
 	public static void setDefaultOptions(BlueImpFileUploadDefaultOptions defaultOptions)
 	{
-		AngularFileUploadPageConfigurator.defaultOptions = defaultOptions;
+		BlueImpFileUploadPageConfigurator.defaultOptions = defaultOptions;
 	}
 
 	public static boolean isRenderJqueryUI()
 	{
-		return AngularFileUploadPageConfigurator.renderJqueryUI;
+		return BlueImpFileUploadPageConfigurator.renderJqueryUI;
 	}
 
 	public static void setRenderJqueryUI(boolean renderJqueryUI)
 	{
-		AngularFileUploadPageConfigurator.renderJqueryUI = renderJqueryUI;
+		BlueImpFileUploadPageConfigurator.renderJqueryUI = renderJqueryUI;
 	}
 
 	@NotNull
@@ -138,85 +138,84 @@ public class AngularFileUploadPageConfigurator
 	{
 		if (!page.isConfigured())
 		{
-			registerModules(page);
-
+			registerModules();
 			page.getBody()
 			    .add(getGalleryDiv());
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.TemplatesReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.TemplatesReference.getJavaScriptReference()
 			                                                                             .setSortOrder(200));
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.LoadImageJCropReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.LoadImageJCropReference.getJavaScriptReference()
 			                                                                                  .setSortOrder(201));
 			page.getBody()
-			    .addCssReference(AngularFileUploadReferencePool.LoadImageJCropReference.getCssReference()
+			    .addCssReference(BlueImpFileUploadReferencePool.LoadImageJCropReference.getCssReference()
 			                                                                           .setSortOrder(202));
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.LoadImageReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.LoadImageReference.getJavaScriptReference()
 			                                                                             .setSortOrder(203));
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.LoadImageMetaReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.LoadImageMetaReference.getJavaScriptReference()
 			                                                                                 .setSortOrder(204));
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.LoadImageExifReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.LoadImageExifReference.getJavaScriptReference()
 			                                                                                 .setSortOrder(205));
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.LoadImageExifMapReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.LoadImageExifMapReference.getJavaScriptReference()
 			                                                                                    .setSortOrder(206));
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.CanvasToBlobReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.CanvasToBlobReference.getJavaScriptReference()
 			                                                                                .setSortOrder(207));
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.FileUploadIFrameTransportReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadIFrameTransportReference.getJavaScriptReference()
 			                                                                                             .setSortOrder(217));
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.FileUploadReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadReference.getJavaScriptReference()
 			                                                                              .setSortOrder(218));
 			page.getBody()
-			    .addCssReference(AngularFileUploadReferencePool.FileUploadReference.getCssReference()
+			    .addCssReference(BlueImpFileUploadReferencePool.FileUploadReference.getCssReference()
 			                                                                       .setSortOrder(219));
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.FileUploadProcessReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadProcessReference.getJavaScriptReference()
 			                                                                                     .setSortOrder(220));
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.FileUploadAudioReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadAudioReference.getJavaScriptReference()
 			                                                                                   .setSortOrder(221));
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.FileUploadImageReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadImageReference.getJavaScriptReference()
 			                                                                                   .setSortOrder(222));
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.FileUploadValidateReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadValidateReference.getJavaScriptReference()
 			                                                                                      .setSortOrder(223));
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.FileUploadVideoReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadVideoReference.getJavaScriptReference()
 			                                                                                   .setSortOrder(224));
 
-			if (AngularFileUploadPageConfigurator.renderJqueryUI)
+			if (BlueImpFileUploadPageConfigurator.renderJqueryUI)
 			{
 				page.getBody()
-				    .addJavaScriptReference(AngularFileUploadReferencePool.FileUploadUIReference.getJavaScriptReference()
+				    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadUIReference.getJavaScriptReference()
 				                                                                                .setSortOrder(225));
 				page.getBody()
-				    .addCssReference(AngularFileUploadReferencePool.FileUploadUIReference.getCssReference()
+				    .addCssReference(BlueImpFileUploadReferencePool.FileUploadUIReference.getCssReference()
 				                                                                         .setSortOrder(226));
 			}
 
 			page.getBody()
-			    .addJavaScriptReference(AngularFileUploadReferencePool.FileUploadAngularReference.getJavaScriptReference()
+			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadAngularReference.getJavaScriptReference()
 			                                                                                     .setSortOrder(227));
 		}
 		return page;
@@ -225,10 +224,10 @@ public class AngularFileUploadPageConfigurator
 	@Override
 	public boolean enabled()
 	{
-		return AngularFileUploadPageConfigurator.enabled;
+		return BlueImpFileUploadPageConfigurator.enabled;
 	}
 
-	private void registerModules(Page page)
+	private void registerModules()
 	{
 		JQueryPageConfigurator.setRequired(true);
 		AngularPageConfigurator.setRequired(true);

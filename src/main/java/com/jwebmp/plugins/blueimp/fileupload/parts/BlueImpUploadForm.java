@@ -3,7 +3,7 @@ package com.jwebmp.plugins.blueimp.fileupload.parts;
 import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.base.angular.AngularAttributes;
 import com.jwebmp.core.base.html.Form;
-import com.jwebmp.plugins.blueimp.fileupload.AngularFileUploadBinderGuiceSiteBinder;
+import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadBinderGuiceSiteBinder;
 import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadOptions;
 
 /**
@@ -21,7 +21,7 @@ public class BlueImpUploadForm<J extends BlueImpUploadForm<J>>
 
 	public BlueImpUploadForm()
 	{
-		addAttribute("action", SessionHelper.getServletUrl() + AngularFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL);
+		addAttribute("action", SessionHelper.getServletUrl() + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL);
 		addAttribute("method", "POST");
 		addAttribute("enc-type", "multipart/form-data");
 		addAttribute("data-file-upload", "options");
@@ -70,14 +70,14 @@ public class BlueImpUploadForm<J extends BlueImpUploadForm<J>>
 	}
 
 	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-
-	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
 	}
 }

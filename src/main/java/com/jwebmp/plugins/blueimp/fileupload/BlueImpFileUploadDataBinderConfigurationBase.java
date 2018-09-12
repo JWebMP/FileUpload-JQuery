@@ -22,11 +22,11 @@ import com.jwebmp.core.base.angular.AngularReferenceBase;
 import com.jwebmp.core.base.angular.services.IAngularConfiguration;
 import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadDefaultOptions;
 
-public class AngularFileUploadDataBinderConfigurationBase
+public class BlueImpFileUploadDataBinderConfigurationBase
 		extends AngularReferenceBase
-		implements IAngularConfiguration<AngularFileUploadDataBinderConfigurationBase>
+		implements IAngularConfiguration<BlueImpFileUploadDataBinderConfigurationBase>
 {
-	public AngularFileUploadDataBinderConfigurationBase()
+	public BlueImpFileUploadDataBinderConfigurationBase()
 	{
 		super("AngularFileUploadDataBinderConfigurationBase");
 	}
@@ -38,7 +38,7 @@ public class AngularFileUploadDataBinderConfigurationBase
 
 		StringBuilder sb = FileTemplates.getFileTemplate(BlueImpFileUploadDefaultOptions.class, "FileUploadDefaultOptionsTemplate", "FileUploadDefaultOptionsTemplate");
 		output = sb.toString()
-		           .replace("FileUploadDefaultOptionsTemplateOptions", AngularFileUploadPageConfigurator.getDefaultOptions()
+		           .replace("FileUploadDefaultOptionsTemplateOptions", BlueImpFileUploadPageConfigurator.getDefaultOptions()
 		                                                                                                .toString());
 
 		return output;

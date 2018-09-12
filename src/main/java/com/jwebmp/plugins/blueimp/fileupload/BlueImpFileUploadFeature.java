@@ -28,8 +28,8 @@ import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadOptions;
  * @version 1.0
  * @since 2013/01/16
  */
-public class AngularFileUploadFeature
-		extends Feature<GlobalFeatures, BlueImpFileUploadOptions, AngularFileUploadFeature>
+public class BlueImpFileUploadFeature
+		extends Feature<GlobalFeatures, BlueImpFileUploadOptions, BlueImpFileUploadFeature>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -42,7 +42,7 @@ public class AngularFileUploadFeature
 	 *
 	 * @param forComponent
 	 */
-	public AngularFileUploadFeature(Component forComponent)
+	public BlueImpFileUploadFeature(Component forComponent)
 	{
 		super("BlueImpFileUploadFeature");
 		setComponent(forComponent);

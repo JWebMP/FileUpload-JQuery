@@ -9,7 +9,7 @@ import java.util.logging.Level;
 
 import static com.jwebmp.core.utilities.StaticStrings.*;
 
-public class AngularFileUploadBinderGuiceSiteBinder
+public class BlueImpFileUploadBinderGuiceSiteBinder
 		implements IGuiceSiteBinder<GuiceSiteInjectorModule>
 {
 	public static final String BLUEIMP_FILEUPLOAD_SERVLETURL = "blueimpangularfileupload";
@@ -18,9 +18,9 @@ public class AngularFileUploadBinderGuiceSiteBinder
 	@Override
 	public void onBind(GuiceSiteInjectorModule module)
 	{
-		module.serveRegex$("(" + "/" + AngularFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + ")" + QUERY_PARAMETERS_REGEX)
+		module.serveRegex$("(" + "/" + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + ")" + QUERY_PARAMETERS_REGEX)
 		      .with(AngularFileServlet.class);
 
-		AngularFileUploadBinderGuiceSiteBinder.log.log(Level.INFO, "Serving File Uploads at {0}", "/" + AngularFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL);
+		BlueImpFileUploadBinderGuiceSiteBinder.log.log(Level.INFO, "Serving File Uploads at {0}", "/" + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL);
 	}
 }

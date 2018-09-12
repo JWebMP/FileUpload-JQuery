@@ -27,7 +27,7 @@ public class AngularFileUploadTestPage
 
 	public AngularFileUploadTestPage()
 	{
-		AngularFileUpload fileUpload = new AngularFileUpload();
+		BlueImpFileUpload fileUpload = new BlueImpFileUpload();
 		BlueImpUploadButtonBar bar = fileUpload.addButtonBar();
 		BlueImpFileUploadTable table = fileUpload.addDisplayTable();
 

@@ -25,7 +25,7 @@ import com.jwebmp.guicedinjection.pairing.Pair;
 import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.DataCallIntercepter;
 import com.jwebmp.logger.LogFactory;
-import com.jwebmp.plugins.blueimp.fileupload.AngularFileUploadBinderGuiceSiteBinder;
+import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadBinderGuiceSiteBinder;
 import com.jwebmp.plugins.blueimp.fileupload.intercepters.OnDeleteFileInterceptor;
 import com.jwebmp.plugins.blueimp.fileupload.intercepters.OnFileUploadInterceptor;
 import com.jwebmp.plugins.blueimp.fileupload.intercepters.OnGetFileInterceptor;
@@ -281,9 +281,9 @@ public class AngularFileServlet
 				file.setContent(fis);
 				file.setType(new Tika().detect(item.getName()));
 
-				file.setDownloadUrl(SessionHelper.getServerPath() + AngularFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?getfile=" + item.getName());
-				file.setThumbnailUrl(SessionHelper.getServerPath() + AngularFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?getthumb=" + item.getName());
-				file.setDeleteUrl(SessionHelper.getServerPath() + AngularFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?delfile=" + item.getName());
+				file.setDownloadUrl(SessionHelper.getServerPath() + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?getfile=" + item.getName());
+				file.setThumbnailUrl(SessionHelper.getServerPath() + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?getthumb=" + item.getName());
+				file.setDeleteUrl(SessionHelper.getServerPath() + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?delfile=" + item.getName());
 
 				filesArray.getAllFiles()
 				          .add(file);

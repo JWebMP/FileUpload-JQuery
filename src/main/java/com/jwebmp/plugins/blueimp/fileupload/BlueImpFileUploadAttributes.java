@@ -24,7 +24,7 @@ import static com.jwebmp.core.utilities.StaticStrings.*;
 /**
  * @author GedMarc
  */
-public enum AngularFileUploadAttributes
+public enum BlueImpFileUploadAttributes
 		implements AttributeDefinitions
 {
 	Visibility;
@@ -34,7 +34,7 @@ public enum AngularFileUploadAttributes
 	/**
 	 * The component attributes
 	 */
-	AngularFileUploadAttributes()
+	BlueImpFileUploadAttributes()
 	{
 	}
 

@@ -3,9 +3,9 @@ import com.jwebmp.core.base.angular.services.IAngularController;
 import com.jwebmp.core.base.angular.services.IAngularModule;
 import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.guicedservlets.services.IGuiceSiteBinder;
-import com.jwebmp.plugins.blueimp.fileupload.AngularFileUploadBinderGuiceSiteBinder;
-import com.jwebmp.plugins.blueimp.fileupload.AngularFileUploadDataBinderConfigurationBase;
-import com.jwebmp.plugins.blueimp.fileupload.AngularFileUploadPageConfigurator;
+import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadBinderGuiceSiteBinder;
+import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadDataBinderConfigurationBase;
+import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadPageConfigurator;
 import com.jwebmp.plugins.blueimp.fileupload.angular.AngularBlueImpFileUploadModule;
 import com.jwebmp.plugins.blueimp.fileupload.angular.BlueImpFileDestroyController;
 
@@ -35,11 +35,11 @@ module com.jwebmp.plugins.blueimp.fileupload {
 	requires com.jwebmp.plugins.blueimp.gallery;
 	requires com.jwebmp.interception;
 
-	provides IAngularConfiguration with AngularFileUploadDataBinderConfigurationBase;
+	provides IAngularConfiguration with BlueImpFileUploadDataBinderConfigurationBase;
 	provides IAngularController with BlueImpFileDestroyController;
 	provides IAngularModule with AngularBlueImpFileUploadModule;
-	provides IPageConfigurator with AngularFileUploadPageConfigurator;
-	provides IGuiceSiteBinder with AngularFileUploadBinderGuiceSiteBinder;
+	provides IPageConfigurator with BlueImpFileUploadPageConfigurator;
+	provides IGuiceSiteBinder with BlueImpFileUploadBinderGuiceSiteBinder;
 
 	opens com.jwebmp.plugins.blueimp.fileupload to com.fasterxml.jackson.databind, com.jwebmp.core;
 	opens com.jwebmp.plugins.blueimp.fileupload.options to com.fasterxml.jackson.databind, com.jwebmp.core;

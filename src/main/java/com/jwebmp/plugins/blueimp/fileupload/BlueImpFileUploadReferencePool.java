@@ -26,7 +26,7 @@ import com.jwebmp.core.base.servlets.interfaces.ReferencePool;
  * @author GedMarc
  * @since 20 Apr 2016
  */
-public enum AngularFileUploadReferencePool
+public enum BlueImpFileUploadReferencePool
 		implements ReferencePool
 {
 	/**
@@ -92,7 +92,7 @@ public enum AngularFileUploadReferencePool
 	/**
 	 * Constructs a reference pool
 	 */
-	AngularFileUploadReferencePool()
+	BlueImpFileUploadReferencePool()
 	{
 	}
 
@@ -102,7 +102,7 @@ public enum AngularFileUploadReferencePool
 	 * @param javaScriptReference
 	 * @param cssReference
 	 */
-	AngularFileUploadReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
+	BlueImpFileUploadReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
 	{
 		this.javaScriptReference = javaScriptReference;
 		this.cssReference = cssReference;

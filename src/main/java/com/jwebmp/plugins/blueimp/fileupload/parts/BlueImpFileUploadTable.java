@@ -35,15 +35,33 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 		extends Table
 {
 
+	private static final String NgRepeat = "data-ng-repeat";
+	private static final String NgClass = "data-ng-class";
+	private static final String NgSwitch = "data-ng-switch";
+	private static final String NgOn = "data-on";
+	private static final String NgSwitchWhen = "data-ng-switch-when";
+	private static final String NgSwitchDefault = "data-ng-switch-default";
+	private static final String NgDownload = "download";
+	private static final String NgDataGallery = "data-gallery";
+	private static final String NgDataSource = "data-ng-source";
+	private static final String NgDataFileUploadPreview = "data-file-upload-preview";
+	private static final String NgDataHref = "data-ng-href";
+	private static final String NgTitle = "title";
+	private static final String NgClick = "data-ng-click";
+	private static final String NgHide = "data-ng-hide";
+	private static final String FileName = "{{file.name}}";
+	private static final String FileUrl = "{{file.url}}";
+
 	private final TableRow<?> fileRow;
 	private boolean showThumbnail = true;
 	private boolean showFileName = true;
 	private boolean showFileSize = true;
+
 	private ComponentHierarchyBase fileProgressBarComponent;
+
 	private boolean showFileButtons = true;
 
 	private String errorClass = "error";
-
 	private String startButtonClass;
 	private String cancelButtonClass;
 	private String deleteButtonClass;
@@ -59,8 +77,8 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 	public BlueImpFileUploadTable()
 	{
 		fileRow = new TableRow<>();
-		fileRow.addAttribute("data-ng-repeat", "file in queue");
-		fileRow.addAttribute("data-ng-class", "{'processing': file.$processing()}");
+		fileRow.addAttribute(NgRepeat, "file in queue");
+		fileRow.addAttribute(NgClass, "{'processing': file.$processing()}");
 
 		addClass("ng-cloak");
 		add(fileRow);
@@ -74,21 +92,21 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 			if (isShowThumbnail())
 			{
 				TableCell<?> cell = new TableCell<>();
-				cell.addAttribute("data-ng-switch", STRING_EMPTY);
-				cell.addAttribute("data-on", "!!file.thumbnailUrl");
+				cell.addAttribute(NgSwitch, STRING_EMPTY);
+				cell.addAttribute(NgOn, "!!file.thumbnailUrl");
 
 				Div sp = new DivSimple<>();
 				sp.addClass("preview");
-				sp.addAttribute("data-ng-switch-when", "true");
+				sp.addAttribute(NgSwitchWhen, "true");
 
 				Link downloadLink = new Link();
-				downloadLink.addAttribute("data-ng-href", "{{file.url}}");
-				downloadLink.addAttribute(GlobalAttributes.Title, "{{file.name}}");
-				downloadLink.addAttribute("download", "{{file.name}}");
-				downloadLink.addAttribute("data-gallery", STRING_EMPTY);
+				downloadLink.addAttribute(NgDataHref, FileUrl);
+				downloadLink.addAttribute(GlobalAttributes.Title, FileName);
+				downloadLink.addAttribute(NgDownload, FileName);
+				downloadLink.addAttribute(NgDataGallery, STRING_EMPTY);
 
 				Image previewImage = new Image<>(null);
-				previewImage.addAttribute("data-ng-source", "{{file.thumbnailUrl}}");
+				previewImage.addAttribute(NgDataSource, "{{file.thumbnailUrl}}");
 
 				downloadLink.add(previewImage);
 				sp.add(downloadLink);
@@ -97,8 +115,8 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 
 				Div previewSwitchDiv = new DivSimple();
 				previewSwitchDiv.addClass("preview");
-				previewSwitchDiv.addAttribute("data-ng-switch-default", STRING_EMPTY);
-				previewSwitchDiv.addAttribute("data-file-upload-preview", "file");
+				previewSwitchDiv.addAttribute(NgSwitchDefault, STRING_EMPTY);
+				previewSwitchDiv.addAttribute(NgDataFileUploadPreview, "file");
 
 				cell.add(previewSwitchDiv);
 
@@ -111,32 +129,32 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 
 				Paragraph nameParagraph = new Paragraph();
 				nameParagraph.addClass("name");
-				nameParagraph.addAttribute("data-ng-switch", STRING_EMPTY);
-				nameParagraph.addAttribute("data-on", "!!file.url");
+				nameParagraph.addAttribute(NgSwitch, STRING_EMPTY);
+				nameParagraph.addAttribute(NgOn, "!!file.url");
 
 				Span trueSwitchSpan = new Span();
-				trueSwitchSpan.addAttribute("data-ng-switch-when", "true");
-				trueSwitchSpan.addAttribute("data-ng-switch", STRING_EMPTY);
-				trueSwitchSpan.addAttribute("data-on", "!!file.thumbnailUrl");
+				trueSwitchSpan.addAttribute(NgSwitchWhen, "true");
+				trueSwitchSpan.addAttribute(NgSwitch, STRING_EMPTY);
+				trueSwitchSpan.addAttribute(NgOn, "!!file.thumbnailUrl");
 
 				Span defaultSwitchSpan = new Span();
-				defaultSwitchSpan.addAttribute("data-ng-switch-default", STRING_EMPTY);
-				defaultSwitchSpan.setText("{{file.name}}");
+				defaultSwitchSpan.addAttribute(NgSwitchDefault, STRING_EMPTY);
+				defaultSwitchSpan.setText(FileName);
 
 				Link spanSwitchTrue = new Link();
-				spanSwitchTrue.addAttribute("data-ng-switch-when", "true");
-				spanSwitchTrue.addAttribute("data-ng-href", "{{file.url}}");
-				spanSwitchTrue.addAttribute("title", "{{file.name}}");
-				spanSwitchTrue.addAttribute("download", "{{file.name}}");
-				spanSwitchTrue.addAttribute("data-gallery", STRING_EMPTY);
-				spanSwitchTrue.setText("{{file.name}}");
+				spanSwitchTrue.addAttribute(NgSwitchWhen, "true");
+				spanSwitchTrue.addAttribute(NgDataHref, FileUrl);
+				spanSwitchTrue.addAttribute(NgTitle, FileName);
+				spanSwitchTrue.addAttribute(NgDownload, FileName);
+				spanSwitchTrue.addAttribute(NgDataGallery, STRING_EMPTY);
+				spanSwitchTrue.setText(FileName);
 
 				Link spanSwitchDefault = new Link();
-				spanSwitchDefault.addAttribute("data-ng-switch-default", STRING_EMPTY);
-				spanSwitchDefault.addAttribute("data-ng-href", "{{file.url}}");
-				spanSwitchDefault.addAttribute("title", "{{file.name}}");
-				spanSwitchDefault.addAttribute("download", "{{file.name}}");
-				spanSwitchDefault.setText("{{file.name}}");
+				spanSwitchDefault.addAttribute(NgSwitchDefault, STRING_EMPTY);
+				spanSwitchDefault.addAttribute(NgDataHref, FileUrl);
+				spanSwitchDefault.addAttribute(NgTitle, FileName);
+				spanSwitchDefault.addAttribute(NgDownload, FileName);
+				spanSwitchDefault.setText(FileName);
 
 				trueSwitchSpan.add(spanSwitchTrue);
 				trueSwitchSpan.add(spanSwitchDefault);
@@ -166,7 +184,7 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 
 				if (fileProgressBarComponent != null)
 				{
-					fileProgressBarComponent.addAttribute("data-ng-class", "{pending: 'in'}[file.$state()]");
+					fileProgressBarComponent.addAttribute(NgClass, "{pending: 'in'}[file.$state()]");
 					fileProgressBarComponent.addAttribute("data-file-upload-progress", "file.$progress()");
 					cell.add(fileProgressBarComponent);
 				}
@@ -184,8 +202,8 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 					startButton.addClass(startButtonClass);
 				}
 				startButton.addClass("start");
-				startButton.addAttribute("data-ng-click", "file.$submit()");
-				startButton.addAttribute("data-ng-hide", "!file.$submit || options.autoUpload");
+				startButton.addAttribute(NgClick, "file.$submit()");
+				startButton.addAttribute(NgHide, "!file.$submit || options.autoUpload");
 				startButton.addAttribute("data-ng-disabled", "file.$state() == 'pending' || file.$state() == 'rejected'");
 
 				if (startButtonIcon != null)
@@ -204,8 +222,8 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 					cancelButton.addClass(cancelButtonClass);
 				}
 				cancelButton.addClass("cancel");
-				cancelButton.addAttribute("data-ng-click", "file.$cancel()");
-				cancelButton.addAttribute("data-ng-hide", "!file.$cancel");
+				cancelButton.addAttribute(NgClick, "file.$cancel()");
+				cancelButton.addAttribute(NgHide, "!file.$cancel");
 
 				if (cancelButtonIcon != null)
 				{
@@ -224,8 +242,8 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 				}
 				deleteButton.addAttribute("data-ng-controller", BlueImpFileDestroyController.FILE_DESTROY_CONTROLLER_NAME);
 				deleteButton.addClass("destroy");
-				deleteButton.addAttribute("data-ng-click", "file.$destroy()");
-				deleteButton.addAttribute("data-ng-hide", "!file.$destroy");
+				deleteButton.addAttribute(NgClick, "file.$destroy()");
+				deleteButton.addAttribute(NgHide, "!file.$destroy");
 
 				if (deleteButtonIcon != null)
 				{
