@@ -50,7 +50,7 @@ import javax.validation.constraints.NotNull;
 		pluginLastUpdatedDate = "2017/09/18")
 @Singleton
 public class BlueImpFileUploadPageConfigurator
-		implements IPageConfigurator
+		implements IPageConfigurator<BlueImpFileUploadPageConfigurator>
 {
 	/**
 	 * If this configurator is enabled

@@ -22,7 +22,7 @@ import com.jwebmp.plugins.blueimp.fileupload.parts.BlueImpUploadForm;
 
 @ComponentInformation(name = "Angular File Upload",
 		description = "File Upload widget with multiple file selection, drag&drop support, progress bar, validation and preview images, audio and video for jQuery. Supports cross-domain, chunked and resumable file uploads. Works with any server-side platform (Google App Engine, PHP, Python, Ruby on Rails, Java, etc.) that supports standard HTML form file uploads. ",
-		url = "https://github.com/GedMarc/JWebSwing-AngularFileUpload")
+		url = "https://github.com/GedMarc/JWebMP-AngularFileUpload")
 public class BlueImpFileUpload<J extends BlueImpFileUpload<J>>
 		extends BlueImpUploadForm<J>
 {
