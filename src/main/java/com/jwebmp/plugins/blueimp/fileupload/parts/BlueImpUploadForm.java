@@ -15,7 +15,6 @@ public class BlueImpUploadForm<J extends BlueImpUploadForm<J>>
 		extends Form<J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	private BlueImpFileUploadOptions options;
 

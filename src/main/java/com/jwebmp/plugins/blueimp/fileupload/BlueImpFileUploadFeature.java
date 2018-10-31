@@ -32,7 +32,6 @@ public class BlueImpFileUploadFeature
 		extends Feature<GlobalFeatures, BlueImpFileUploadOptions, BlueImpFileUploadFeature>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	private BlueImpFileUploadOptions options;
 

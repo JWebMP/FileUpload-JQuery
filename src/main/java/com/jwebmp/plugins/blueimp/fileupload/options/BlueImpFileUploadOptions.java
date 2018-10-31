@@ -48,7 +48,7 @@ public class BlueImpFileUploadOptions<J extends BlueImpFileUploadOptions<J>>
 		extends JavaScriptPart<J>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	private String url;
 	@JsonProperty("type")
 	private String urlType;

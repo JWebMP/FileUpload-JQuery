@@ -31,7 +31,6 @@ public class AngularBlueImpFileUploadModule
 		implements IAngularModule<AngularBlueImpFileUploadModule>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/*
 	 * Constructs a new AngularRouteModule
