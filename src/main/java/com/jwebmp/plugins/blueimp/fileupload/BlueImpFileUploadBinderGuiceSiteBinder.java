@@ -1,6 +1,6 @@
 package com.jwebmp.plugins.blueimp.fileupload;
 
-import com.jwebmp.guicedservlets.GuiceSiteInjectorModule;
+import com.jwebmp.guicedservlets.services.GuiceSiteInjectorModule;
 import com.jwebmp.guicedservlets.services.IGuiceSiteBinder;
 import com.jwebmp.logger.LogFactory;
 import com.jwebmp.plugins.blueimp.fileupload.servlets.AngularFileServlet;
