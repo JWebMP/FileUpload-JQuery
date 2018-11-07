@@ -19,6 +19,7 @@ package com.jwebmp.plugins.blueimp.fileupload.angular;
 
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.base.angular.services.IAngularController;
+import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadPageConfigurator;
 
 public class BlueImpFileDestroyController
 		extends com.jwebmp.core.base.angular.AngularReferenceBase
@@ -37,5 +38,16 @@ public class BlueImpFileDestroyController
 	{
 		return FileTemplates.getFileTemplate(BlueImpFileDestroyController.class, BlueImpFileDestroyController.FILE_DESTROY_CONTROLLER_NAME, "blueimpfiledestroycontroller")
 		                    .toString();
+	}
+
+	/**
+	 * If this page configurator is enabled
+	 *
+	 * @return if the configuration must run
+	 */
+	@Override
+	public boolean enabled()
+	{
+		return BlueImpFileUploadPageConfigurator.isEnabled();
 	}
 }

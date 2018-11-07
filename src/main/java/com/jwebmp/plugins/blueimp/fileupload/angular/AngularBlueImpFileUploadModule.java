@@ -19,6 +19,7 @@ package com.jwebmp.plugins.blueimp.fileupload.angular;
 
 import com.jwebmp.core.base.angular.modules.AngularModuleBase;
 import com.jwebmp.core.base.angular.services.IAngularModule;
+import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadPageConfigurator;
 
 /**
  * The module getting loaded into angular
@@ -44,5 +45,16 @@ public class AngularBlueImpFileUploadModule
 	public String renderFunction()
 	{
 		return null;
+	}
+
+	/**
+	 * If this page configurator is enabled
+	 *
+	 * @return if the configuration must run
+	 */
+	@Override
+	public boolean enabled()
+	{
+		return BlueImpFileUploadPageConfigurator.isEnabled();
 	}
 }
