@@ -50,8 +50,9 @@
         </dependency>
 
         <dependency>
-            <groupId>commons-fileupload</groupId>
+            <groupId>com.jwebmp</groupId>
             <artifactId>commons-fileupload</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

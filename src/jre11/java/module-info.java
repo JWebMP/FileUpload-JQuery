@@ -33,7 +33,7 @@ module com.jwebmp.plugins.blueimp.fileupload {
 	requires com.google.guice;
 	requires com.jwebmp.guicedinjection;
 	requires org.apache.commons.io;
-	requires commons.fileupload;
+	requires org.apache.commons.fileupload;
 	requires org.apache.tika.core;
 	requires com.jwebmp.plugins.blueimp.gallery;
 	requires com.jwebmp.interception;
