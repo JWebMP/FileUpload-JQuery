@@ -51,8 +51,8 @@ public class BlueImpUploadForm<J extends BlueImpUploadForm<J>>
 			if (!optionsString.trim()
 			                  .isEmpty())
 			{
-				addAttribute(AngularAttributes.ngInit, "options=" + getOptions().toString()
-				                                                                .replaceAll("\\s", ""));
+				addAttribute(AngularAttributes.ngInit.getAttributeName(), "options=" + getOptions().toString()
+				                                                                                   .replaceAll("\\s", ""));
 			}
 		}
 		super.preConfigure();

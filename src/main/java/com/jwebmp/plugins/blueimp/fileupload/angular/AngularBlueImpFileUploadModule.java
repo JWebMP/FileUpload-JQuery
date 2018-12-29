@@ -18,7 +18,6 @@
 package com.jwebmp.plugins.blueimp.fileupload.angular;
 
 import com.jwebmp.core.base.angular.modules.AngularModuleBase;
-import com.jwebmp.core.base.angular.services.IAngularModule;
 import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadPageConfigurator;
 
 /**
@@ -28,11 +27,8 @@ import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadPageConfigurator;
  * @since 08 Jun 2017
  */
 public class AngularBlueImpFileUploadModule
-		extends AngularModuleBase
-		implements IAngularModule<AngularBlueImpFileUploadModule>
+		extends AngularModuleBase<AngularBlueImpFileUploadModule>
 {
-
-
 	/*
 	 * Constructs a new AngularRouteModule
 	 */
