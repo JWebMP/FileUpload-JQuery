@@ -136,7 +136,7 @@ public class BlueImpFileUploadPageConfigurator
 	@SuppressWarnings("unchecked")
 	public Page configure(Page page)
 	{
-		if (!page.isConfigured())
+		if (!page.isConfigured() && enabled())
 		{
 			registerModules();
 			page.getBody()

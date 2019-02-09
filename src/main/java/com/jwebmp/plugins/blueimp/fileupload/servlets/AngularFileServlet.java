@@ -65,8 +65,6 @@ import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 public class AngularFileServlet
 		extends JWDefaultServlet
 {
-
-
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("BlueImpAngularFileServlet");
 

@@ -51,7 +51,7 @@ public enum BlueImpFileUploadReferencePool
 	LoadImageReference(new JavascriptReference("LoadImageReference", 9.22, "bower_components/blueimp-load-image/js/load-image.min.js"),
 	                   null),
 
-	CanvasToBlobReference(new JavascriptReference("CanvasToBlobReference", 9.22, "jbower_components/blueimp-load-image/js/canvas-to-blob.min.js"),
+	CanvasToBlobReference(new JavascriptReference("CanvasToBlobReference", 9.22, "bower_components/blueimp-load-image/js/canvas-to-blob.min.js"),
 	                      null),
 
 	/**
