@@ -48,10 +48,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -166,8 +163,8 @@ public class AngularFileServlet
 	private void processGetFile(HttpServletRequest request, HttpServletResponse response)
 	{
 		String filename = request.getParameter(AngularFileServlet.getFileMethod);
-		Set<Class<? extends OnGetFileInterceptor>> intercepters = GuiceContext.reflect()
-		                                                                      .getSubTypesOf(OnGetFileInterceptor.class);
+		Set<Class<? extends OnGetFileInterceptor>> intercepters = new HashSet(GuiceContext.instance().getScanResult()
+		                                                                                  .getSubclasses(OnGetFileInterceptor.class.getCanonicalName()).loadClasses());
 		if (intercepters == null || intercepters.isEmpty())
 		{
 			AngularFileServlet.log.warning(
@@ -177,7 +174,7 @@ public class AngularFileServlet
 		{
 			intercepters.forEach(a ->
 			                     {
-				                     OnGetFileInterceptor obj = GuiceContext.getInstance(a);
+				                     OnGetFileInterceptor obj = GuiceContext.get(a);
 				                     Pair<String, InputStream> is = obj.onGetFile(filename);
 				                     String mimeType = new Tika().detect(is.getKey());
 				                     response.setContentType(mimeType);
@@ -200,8 +197,8 @@ public class AngularFileServlet
 	{
 		String filename = request.getParameter(AngularFileServlet.deleteFileMethod);
 
-		Set<Class<? extends OnDeleteFileInterceptor>> intercepters = GuiceContext.reflect()
-		                                                                         .getSubTypesOf(OnDeleteFileInterceptor.class);
+		Set<Class<? extends OnDeleteFileInterceptor>> intercepters =new HashSet(GuiceContext.instance().getScanResult()
+		                                                                         .getSubclasses(OnDeleteFileInterceptor.class.getCanonicalName()).loadClasses());
 		if (intercepters == null || intercepters.isEmpty())
 		{
 			AngularFileServlet.log.warning(
@@ -211,7 +208,7 @@ public class AngularFileServlet
 		{
 			intercepters.forEach(a ->
 			                     {
-				                     OnDeleteFileInterceptor obj = GuiceContext.getInstance(a);
+				                     OnDeleteFileInterceptor obj = GuiceContext.get(a);
 				                     obj.onDeleteFile(filename);
 			                     });
 		}
@@ -221,8 +218,8 @@ public class AngularFileServlet
 	{
 		String filename = request.getParameter(AngularFileServlet.getThumbMethod);
 
-		Set<Class<? extends OnThumbnailFileInterceptor>> intercepters = GuiceContext.reflect()
-		                                                                            .getSubTypesOf(OnThumbnailFileInterceptor.class);
+		Set<Class<? extends OnThumbnailFileInterceptor>> intercepters = new HashSet(GuiceContext.instance().getScanResult()
+		                                                                            .getSubclasses(OnThumbnailFileInterceptor.class.getCanonicalName()).loadClasses());
 		if (intercepters == null || intercepters.isEmpty())
 		{
 			AngularFileServlet.log.warning(
@@ -233,7 +230,7 @@ public class AngularFileServlet
 		{
 			intercepters.forEach(a ->
 			                     {
-				                     OnThumbnailFileInterceptor obj = GuiceContext.getInstance(a);
+				                     OnThumbnailFileInterceptor obj = GuiceContext.get(a);
 				                     Pair<String, InputStream> is = obj.onThumbnailGet(filename);
 				                     String mimeType = new Tika().detect(is.getKey());
 				                     response.setContentType(mimeType);
@@ -286,8 +283,8 @@ public class AngularFileServlet
 				filesArray.getAllFiles()
 				          .add(file);
 
-				Set<Class<? extends OnFileUploadInterceptor>> intercepters = GuiceContext.reflect()
-				                                                                         .getSubTypesOf(OnFileUploadInterceptor.class);
+				Set<Class<? extends OnFileUploadInterceptor>> intercepters = new HashSet(GuiceContext.instance().getScanResult()
+				                                                                         .getSubclasses(OnFileUploadInterceptor.class.getCanonicalName()).loadClasses());
 
 				if (intercepters == null || intercepters.isEmpty())
 				{
@@ -298,7 +295,7 @@ public class AngularFileServlet
 				{
 					intercepters.forEach(a ->
 					                     {
-						                     OnFileUploadInterceptor obj = GuiceContext.getInstance(a);
+						                     OnFileUploadInterceptor obj = GuiceContext.get(a);
 						                     obj.onUploadCompleted(file);
 					                     });
 				}
