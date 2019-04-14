@@ -38,7 +38,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.tika.Tika;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -176,8 +175,8 @@ public class AngularFileServlet
 			                     {
 				                     OnGetFileInterceptor obj = GuiceContext.get(a);
 				                     Pair<String, InputStream> is = obj.onGetFile(filename);
-				                     String mimeType = new Tika().detect(is.getKey());
-				                     response.setContentType(mimeType);
+				                    // String mimeType = new Tika().detect(is.getKey());
+				                    // response.setContentType(mimeType);
 				                     response.setHeader("Content-Disposition", "inline; filename=\"" + is.getKey() + "\"");
 				                     try
 				                     {
@@ -232,8 +231,8 @@ public class AngularFileServlet
 			                     {
 				                     OnThumbnailFileInterceptor obj = GuiceContext.get(a);
 				                     Pair<String, InputStream> is = obj.onThumbnailGet(filename);
-				                     String mimeType = new Tika().detect(is.getKey());
-				                     response.setContentType(mimeType);
+				                     //String mimeType = new Tika().detect(is.getKey());
+				                     response.setContentType("application/json");
 				                     response.setHeader("Content-Disposition", "inline; filename=\"" + is.getKey() + "\"");
 				                     try
 				                     {
@@ -274,7 +273,7 @@ public class AngularFileServlet
 			try (FileInputStream fis = new FileInputStream(tempFile))
 			{
 				file.setContent(fis);
-				file.setType(new Tika().detect(item.getName()));
+				file.setType(item.getContentType());
 
 				file.setDownloadUrl(SessionHelper.getServerPath() + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?getfile=" + item.getName());
 				file.setThumbnailUrl(SessionHelper.getServerPath() + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?getthumb=" + item.getName());
