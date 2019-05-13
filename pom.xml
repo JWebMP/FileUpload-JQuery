@@ -55,11 +55,6 @@
             <artifactId>commons-fileupload</artifactId>
         </dependency>
 
-       <!-- <dependency>
-            <groupId>org.apache.tika</groupId>
-            <artifactId>tika-core</artifactId>
-        </dependency>
-        -->
     </dependencies>
 
     <scm>
@@ -76,8 +71,8 @@
             <id>jdk8</id>
             <dependencies>
                 <dependency>
-                    <groupId>com.jwebmp.thirdparty</groupId>
-                    <artifactId>javax.activation</artifactId>
+                    <groupId>jakarta.activation</groupId>
+                    <artifactId>jakarta.activation-api</artifactId>
                 </dependency>
             </dependencies>
             <build>
@@ -110,8 +105,8 @@
             <id>jdk11</id>
             <dependencies>
                 <dependency>
-                    <groupId>com.jwebmp.thirdparty</groupId>
-                    <artifactId>javax.activation</artifactId>
+                    <groupId>jakarta.activation</groupId>
+                    <artifactId>jakarta.activation-api</artifactId>
                 </dependency>
             </dependencies>
         </profile>

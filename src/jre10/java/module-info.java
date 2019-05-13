@@ -25,7 +25,7 @@ module com.jwebmp.plugins.blueimp.fileupload {
 	requires com.jwebmp.guicedservlets;
 	requires com.fasterxml.jackson.annotation;
 	requires com.fasterxml.jackson.databind;
-	requires java.activation;
+	requires jakarta.activation;
 	requires java.validation;
 	requires javax.servlet.api;
 	requires java.logging;
