@@ -1,0 +1,121 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.jwebmp.plugins.blueimp</groupId>
+        <artifactId>jwebmp-plugins-blueimp-parent</artifactId>
+        <version>0.0.0_0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>jwebmp-blueimp-fileupload</artifactId>
+    <packaging>jar</packaging>
+
+    <name>BlueImp File Upload</name>
+    <description>File Upload widget with multiple file selection, drag and drop support, progress bar, validation and preview images, audio and video for jQuery.
+        Supports cross-domain, chunked and resumable file uploads.
+        Works with any server-side platform (Google App Engine, PHP, Python, Ruby on Rails, Java, etc.) that supports standard HTML form file uploads.
+    </description>
+    <url>https://github.com/GedMarc/JWebMP-BlueImpFileUpload</url>
+
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/GedMarc/JWebMP-BlueImpFileUpload/issues</url>
+    </issueManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.jwebmp.plugins.blueimp</groupId>
+            <artifactId>jwebmp-blueimp-gallery</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jwebmp.plugins.angular</groupId>
+            <artifactId>jwebmp-plugins-angularjs</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jwebmp.jpms.commons</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
+
+       <!-- <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+        </dependency>
+        -->
+    </dependencies>
+
+    <scm>
+        <url>https://github.com/GedMarc?tab=repositories</url>
+    </scm>
+
+    <ciManagement>
+        <system>TeamCity</system>
+        <url>http://jwebmp.com/teamcity</url>
+    </ciManagement>
+
+    <profiles>
+        <profile>
+            <id>jdk8</id>
+            <dependencies>
+                <dependency>
+                    <groupId>javax.activation</groupId>
+                    <artifactId>javax.activation-api</artifactId>
+                    <version>${javax.activation.version}</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.moditect</groupId>
+                        <artifactId>moditect-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>add-module-infos</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>add-module-info</goal>
+                                </goals>
+                                <configuration>
+                                    <overwriteExistingFiles>true</overwriteExistingFiles>
+                                    <module>
+                                        <moduleInfoFile>
+                                            src/jre11/java/module-info.java
+                                        </moduleInfoFile>
+                                    </module>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jdk11</id>
+            <dependencies>
+                <dependency>
+                    <groupId>javax.activation</groupId>
+                    <artifactId>javax.activation-api</artifactId>
+                    <version>${javax.activation.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+</project>
