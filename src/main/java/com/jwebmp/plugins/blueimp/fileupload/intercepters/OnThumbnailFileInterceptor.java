@@ -17,7 +17,7 @@
 
 package com.jwebmp.plugins.blueimp.fileupload.intercepters;
 
-import com.jwebmp.guicedinjection.pairing.Pair;
+import com.guicedee.guicedinjection.pairing.Pair;
 
 import java.io.InputStream;
 

@@ -8,16 +8,16 @@ module com.jwebmp.plugins.blueimp.fileupload {
 	exports com.jwebmp.plugins.blueimp.fileupload.parts.json;
 
 	requires com.jwebmp.core;
-	requires com.jwebmp.guicedservlets;
+	requires com.guicedee.guicedservlets;
 	requires com.fasterxml.jackson.annotation;
 	requires com.fasterxml.jackson.databind;
 	requires jakarta.activation;
 	requires java.validation;
 	requires javax.servlet.api;
 	requires java.logging;
-	requires com.jwebmp.logmaster;
+	requires com.guicedee.logmaster;
 	requires com.google.guice;
-	requires com.jwebmp.guicedinjection;
+	requires com.guicedee.guicedinjection;
 	requires org.apache.commons.io;
 	requires org.apache.commons.fileupload;
 
@@ -31,10 +31,10 @@ module com.jwebmp.plugins.blueimp.fileupload {
 	provides com.jwebmp.core.base.angular.services.IAngularController with com.jwebmp.plugins.blueimp.fileupload.angular.BlueImpFileDestroyController;
 	provides com.jwebmp.core.base.angular.services.IAngularModule with com.jwebmp.plugins.blueimp.fileupload.angular.AngularBlueImpFileUploadModule;
 	provides com.jwebmp.core.services.IPageConfigurator with com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadPageConfigurator;
-	provides com.jwebmp.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadBinderGuiceSiteBinder;
+	provides com.guicedee.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadBinderGuiceSiteBinder;
 
-	provides com.jwebmp.guicedinjection.interfaces.IGuiceScanJarExclusions with com.jwebmp.plugins.blueimp.fileupload.implementations.BlueImpFileUploadExclusionsModule;
-	provides com.jwebmp.guicedinjection.interfaces.IGuiceScanModuleExclusions with com.jwebmp.plugins.blueimp.fileupload.implementations.BlueImpFileUploadExclusionsModule;
+	provides com.guicedee.guicedinjection.interfaces.IGuiceScanJarExclusions with com.jwebmp.plugins.blueimp.fileupload.implementations.BlueImpFileUploadExclusionsModule;
+	provides com.guicedee.guicedinjection.interfaces.IGuiceScanModuleExclusions with com.jwebmp.plugins.blueimp.fileupload.implementations.BlueImpFileUploadExclusionsModule;
 
 	opens com.jwebmp.plugins.blueimp.fileupload to com.fasterxml.jackson.databind, com.jwebmp.core, com.google.guice;
 	opens com.jwebmp.plugins.blueimp.fileupload.options to com.fasterxml.jackson.databind, com.jwebmp.core, com.google.guice;
