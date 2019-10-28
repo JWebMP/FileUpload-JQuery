@@ -22,7 +22,7 @@ import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.base.servlets.JWDefaultServlet;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedinjection.pairing.Pair;
-import com.jwebmp.guicedservlets.GuicedServletKeys;
+import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.DataCallIntercepter;
 import com.guicedee.logger.LogFactory;
 import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadBinderGuiceSiteBinder;
