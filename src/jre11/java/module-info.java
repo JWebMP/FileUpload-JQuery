@@ -33,7 +33,6 @@ module com.jwebmp.plugins.blueimp.fileupload {
 	provides com.jwebmp.core.services.IPageConfigurator with com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadPageConfigurator;
 	provides com.guicedee.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadBinderGuiceSiteBinder;
 
-	provides com.guicedee.guicedinjection.interfaces.IGuiceScanJarExclusions with com.jwebmp.plugins.blueimp.fileupload.implementations.BlueImpFileUploadExclusionsModule;
 	provides com.guicedee.guicedinjection.interfaces.IGuiceScanModuleExclusions with com.jwebmp.plugins.blueimp.fileupload.implementations.BlueImpFileUploadExclusionsModule;
 
 	opens com.jwebmp.plugins.blueimp.fileupload to com.fasterxml.jackson.databind, com.jwebmp.core, com.google.guice;
