@@ -13,7 +13,7 @@ module com.jwebmp.plugins.blueimp.fileupload {
 	requires com.fasterxml.jackson.databind;
 	requires jakarta.activation;
 	requires java.validation;
-	requires javax.servlet.api;
+	requires java.servlet;
 	requires java.logging;
 	requires com.guicedee.logmaster;
 	requires com.google.guice;
