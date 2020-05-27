@@ -9,23 +9,15 @@ module com.jwebmp.plugins.blueimp.fileupload {
 
 	requires com.jwebmp.core;
 	requires com.guicedee.guicedservlets;
-	requires com.fasterxml.jackson.annotation;
-	requires com.fasterxml.jackson.databind;
-	requires jakarta.activation;
+
 	requires java.validation;
-	requires java.servlet;
-	requires java.logging;
-	requires com.guicedee.logmaster;
-	requires com.google.guice;
-	requires com.guicedee.guicedinjection;
+
 	requires org.apache.commons.io;
 	requires org.apache.commons.fileupload;
 
 	requires com.jwebmp.plugins.blueimp.gallery;
 	requires com.jwebmp.interception;
 	requires com.jwebmp.core.angularjs;
-
-	requires io.github.classgraph;
 
 	provides com.jwebmp.core.base.angular.services.IAngularConfiguration with com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadDataBinderConfigurationBase;
 	provides com.jwebmp.core.base.angular.services.IAngularController with com.jwebmp.plugins.blueimp.fileupload.angular.BlueImpFileDestroyController;
