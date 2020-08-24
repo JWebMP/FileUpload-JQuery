@@ -24,6 +24,7 @@ import com.jwebmp.plugins.blueimp.fileupload.angular.BlueImpFileDestroyControlle
 
 import javax.validation.constraints.NotNull;
 
+import static com.guicedee.guicedinjection.json.StaticStrings.STRING_EMPTY;
 import static com.jwebmp.core.utilities.StaticStrings.*;
 
 /**
