@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.nio.charset.Charset;
 import java.util.regex.Pattern;
 

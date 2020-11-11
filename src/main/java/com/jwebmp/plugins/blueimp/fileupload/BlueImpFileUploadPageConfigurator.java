@@ -26,7 +26,7 @@ import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadDefaultOptions;
 import com.jwebmp.plugins.blueimp.gallery.BlueImpGallery;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 @PluginInformation(pluginName = "Angular File Upload",
 		pluginUniqueName = "jwebswing-angular-file-upload",

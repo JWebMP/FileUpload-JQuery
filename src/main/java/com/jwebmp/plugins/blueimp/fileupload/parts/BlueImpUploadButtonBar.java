@@ -22,7 +22,7 @@ import com.jwebmp.core.base.html.*;
 import com.jwebmp.core.base.html.inputs.InputFileType;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 import static com.guicedee.guicedinjection.json.StaticStrings.STRING_EMPTY;
 import static com.jwebmp.core.utilities.StaticStrings.*;
