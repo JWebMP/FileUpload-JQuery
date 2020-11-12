@@ -10,7 +10,7 @@ module com.jwebmp.plugins.blueimp.fileupload {
 	requires com.jwebmp.core;
 	requires com.guicedee.guicedservlets;
 
-	requires java.validation;
+	requires jakarta.validation;
 
 	requires org.apache.commons.io;
 	requires org.apache.commons.fileupload;
