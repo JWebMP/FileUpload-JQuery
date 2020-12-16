@@ -17,6 +17,8 @@
 
 package com.jwebmp.plugins.blueimp.fileupload;
 
+import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
+import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
 import com.jwebmp.core.plugins.ComponentInformation;
 import com.jwebmp.plugins.blueimp.fileupload.parts.BlueImpUploadForm;
 
@@ -25,6 +27,7 @@ import com.jwebmp.plugins.blueimp.fileupload.parts.BlueImpUploadForm;
 		url = "https://github.com/GedMarc/JWebMP-AngularFileUpload")
 public class BlueImpFileUpload<J extends BlueImpFileUpload<J>>
 		extends BlueImpUploadForm<J>
+		implements HtmlChildren, BodyChildren
 {
 	/**
 	 * Configures the page for this component

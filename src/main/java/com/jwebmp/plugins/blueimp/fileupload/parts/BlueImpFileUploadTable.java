@@ -20,6 +20,8 @@ package com.jwebmp.plugins.blueimp.fileupload.parts;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.*;
 import com.jwebmp.core.base.html.attributes.GlobalAttributes;
+import com.jwebmp.core.base.html.interfaces.children.FormChildren;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.plugins.blueimp.fileupload.angular.BlueImpFileDestroyController;
 
 import jakarta.validation.constraints.NotNull;
@@ -33,7 +35,8 @@ import static com.jwebmp.core.utilities.StaticStrings.*;
  * @param <J>
  */
 public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
-		extends Table
+		extends Table<J>
+		implements FormChildren
 {
 
 	private static final String NgRepeat = "data-ng-repeat";
@@ -58,7 +61,7 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 	private boolean showFileName = true;
 	private boolean showFileSize = true;
 
-	private ComponentHierarchyBase fileProgressBarComponent;
+	private IComponentHierarchyBase<?,?> fileProgressBarComponent;
 
 	private boolean showFileButtons = true;
 
@@ -185,8 +188,8 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 
 				if (fileProgressBarComponent != null)
 				{
-					fileProgressBarComponent.addAttribute(NgClass, "{pending: 'in'}[file.$state()]");
-					fileProgressBarComponent.addAttribute("data-file-upload-progress", "file.$progress()");
+					fileProgressBarComponent.asAttributeBase().addAttribute(NgClass, "{pending: 'in'}[file.$state()]");
+					fileProgressBarComponent.asAttributeBase().addAttribute("data-file-upload-progress", "file.$progress()");
 					cell.add(fileProgressBarComponent);
 				}
 
@@ -330,9 +333,9 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J applyWidthStyleForProgress(ComponentHierarchyBase componentToDynamicallySetWidth)
+	public J applyWidthStyleForProgress(IComponentHierarchyBase<?,?> componentToDynamicallySetWidth)
 	{
-		componentToDynamicallySetWidth.addAttribute("data-ng-style", "{width: num + '%'}");
+		componentToDynamicallySetWidth.asAttributeBase().addAttribute("data-ng-style", "{width: num + '%'}");
 		return (J) this;
 	}
 
@@ -341,14 +344,14 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 		return fileRow;
 	}
 
-	public ComponentHierarchyBase getFileProgressBarComponent()
+	public IComponentHierarchyBase<?,?> getFileProgressBarComponent()
 	{
 		return fileProgressBarComponent;
 	}
 
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J setFileProgressBarComponent(ComponentHierarchyBase fileProgressBarComponent)
+	public J setFileProgressBarComponent(IComponentHierarchyBase<?,?> fileProgressBarComponent)
 	{
 		this.fileProgressBarComponent = fileProgressBarComponent;
 		return (J) this;

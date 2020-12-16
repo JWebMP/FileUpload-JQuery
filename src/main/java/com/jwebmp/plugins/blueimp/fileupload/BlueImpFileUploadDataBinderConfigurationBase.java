@@ -23,7 +23,7 @@ import com.jwebmp.core.base.angular.services.IAngularConfiguration;
 import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadDefaultOptions;
 
 public class BlueImpFileUploadDataBinderConfigurationBase
-		extends AngularReferenceBase
+		extends AngularReferenceBase<BlueImpFileUploadDataBinderConfigurationBase>
 		implements IAngularConfiguration<BlueImpFileUploadDataBinderConfigurationBase>
 {
 	public BlueImpFileUploadDataBinderConfigurationBase()

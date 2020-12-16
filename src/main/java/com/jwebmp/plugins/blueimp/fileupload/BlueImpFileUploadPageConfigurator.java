@@ -21,6 +21,7 @@ import com.google.inject.Singleton;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.plugins.PluginInformation;
+import com.jwebmp.core.plugins.PluginStatus;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadDefaultOptions;
@@ -28,8 +29,8 @@ import com.jwebmp.plugins.blueimp.gallery.BlueImpGallery;
 
 import jakarta.validation.constraints.NotNull;
 
-@PluginInformation(pluginName = "Angular File Upload",
-		pluginUniqueName = "jwebswing-angular-file-upload",
+@PluginInformation(pluginName = "BlueImp File Upload",
+		pluginUniqueName = "jwebmp-blueimp-file-upload",
 		pluginDescription = "File Upload widget with multiple file selection, drag&drop support, progress bars, validation and preview " +
 		                    "images, audio and video for jQuery.\n" +
 		                    "Supports cross-domain, chunked and resumable file uploads " +
@@ -44,10 +45,16 @@ import jakarta.validation.constraints.NotNull;
 		pluginSourceUrl = "https://github.com/blueimp/jQuery-File-Upload",
 		pluginWikiUrl = "https://github.com/GedMarc/BlueImpFileUploadPageConfigurator/wiki",
 		pluginOriginalHomepage = "https://github.com/blueimp/jQuery-File-Upload",
-		pluginDownloadUrl = "https://sourceforge.net/projects/jwebswing/files/plugins/BlueImpFileUploadPageConfigurator.jar/download",
+		pluginDownloadUrl = "https://mvnrepository.com/artifact/com.jwebmp.plugins.blueimp/jwebmp-blueimp-fileupload",
 		pluginIconUrl = "",
 		pluginIconImageUrl = "",
-		pluginLastUpdatedDate = "2017/09/18")
+		pluginLastUpdatedDate = "2017/09/18",
+		pluginGroupId = "com.jwebmp.plugins.blueimp",
+		pluginArtifactId = "jwebmp-blueimp-fileupload",
+		pluginModuleName = "com.jwebmp.plugins.blueimp.fileupload",
+		pluginStatus = PluginStatus.Released
+		
+)
 @Singleton
 public class BlueImpFileUploadPageConfigurator
 		implements IPageConfigurator<BlueImpFileUploadPageConfigurator>

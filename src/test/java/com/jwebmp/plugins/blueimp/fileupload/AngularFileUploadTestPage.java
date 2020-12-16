@@ -18,6 +18,7 @@
 package com.jwebmp.plugins.blueimp.fileupload;
 
 import com.jwebmp.core.Page;
+import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.plugins.blueimp.fileupload.parts.BlueImpFileUploadTable;
 import com.jwebmp.plugins.blueimp.fileupload.parts.BlueImpUploadButtonBar;
 
@@ -27,7 +28,7 @@ public class AngularFileUploadTestPage
 
 	public AngularFileUploadTestPage()
 	{
-		BlueImpFileUpload fileUpload = new BlueImpFileUpload();
+		BlueImpFileUpload<?> fileUpload = new BlueImpFileUpload();
 		BlueImpUploadButtonBar bar = fileUpload.addButtonBar();
 		BlueImpFileUploadTable table = fileUpload.addDisplayTable();
 
@@ -36,6 +37,6 @@ public class AngularFileUploadTestPage
 		bar.addCancelButton("btn btn-warning", "glyphicon glyphicon-ban-circle", "Cancel Upload");
 		bar.addGlobalFileProcessingState();
 
-		add(fileUpload);
+		add((BodyChildren) fileUpload);
 	}
 }

@@ -47,8 +47,6 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.*;
 public class BlueImpFileUploadOptions<J extends BlueImpFileUploadOptions<J>>
 		extends JavaScriptPart<J>
 {
-
-
 	private String url;
 	@JsonProperty("type")
 	private String urlType;

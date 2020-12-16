@@ -3,6 +3,7 @@ package com.jwebmp.plugins.blueimp.fileupload.parts;
 import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.base.angular.AngularAttributes;
 import com.jwebmp.core.base.html.Form;
+import com.jwebmp.core.base.html.interfaces.children.FormChildren;
 import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadBinderGuiceSiteBinder;
 import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadOptions;
 
@@ -12,7 +13,7 @@ import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadOptions;
  * @param <J>
  */
 public class BlueImpUploadForm<J extends BlueImpUploadForm<J>>
-		extends Form<J>
+		extends Form<J> implements FormChildren
 {
 
 

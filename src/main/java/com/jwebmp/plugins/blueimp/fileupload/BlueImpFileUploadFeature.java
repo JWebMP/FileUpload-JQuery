@@ -19,6 +19,7 @@ package com.jwebmp.plugins.blueimp.fileupload;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.Feature;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadOptions;
 
 /**
@@ -29,11 +30,11 @@ import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadOptions;
  * @since 2013/01/16
  */
 public class BlueImpFileUploadFeature
-		extends Feature<GlobalFeatures, BlueImpFileUploadOptions, BlueImpFileUploadFeature>
+		extends Feature<GlobalFeatures, BlueImpFileUploadOptions<?>, BlueImpFileUploadFeature>
 {
 
 
-	private BlueImpFileUploadOptions options;
+	private BlueImpFileUploadOptions<?> options;
 
 	/**
 	 * Constructs a new Tooltip ComponentFeatureBase for a component. Adds the tooltip text as the Title attribute to the component
@@ -41,7 +42,7 @@ public class BlueImpFileUploadFeature
 	 *
 	 * @param forComponent
 	 */
-	public BlueImpFileUploadFeature(Component forComponent)
+	public BlueImpFileUploadFeature(IComponentHierarchyBase<?,?> forComponent)
 	{
 		super("BlueImpFileUploadFeature");
 		setComponent(forComponent);
@@ -66,11 +67,11 @@ public class BlueImpFileUploadFeature
 	 * @return
 	 */
 	@Override
-	public BlueImpFileUploadOptions getOptions()
+	public BlueImpFileUploadOptions<?> getOptions()
 	{
 		if (options == null)
 		{
-			options = new BlueImpFileUploadOptions();
+			options = new BlueImpFileUploadOptions<>();
 		}
 		return options;
 	}
@@ -78,7 +79,7 @@ public class BlueImpFileUploadFeature
 	@Override
 	public void assignFunctionsToComponent()
 	{
-		String requiredString = getComponent().getJQueryID() + "fileupload(";
+		String requiredString = getComponent().asBase().getJQueryID() + "fileupload(";
 		requiredString += getOptions().toString();
 		requiredString += ");" + getNewLine();
 		addQuery(requiredString);
