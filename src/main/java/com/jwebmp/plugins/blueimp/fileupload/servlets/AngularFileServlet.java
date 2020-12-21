@@ -77,9 +77,7 @@ public class AngularFileServlet
 	{
 		//Nothing Needed
 	}
-
-	@Override
-	@SuppressWarnings("unchecked")
+	
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 	{
 		AngularFileServlet.log.log(Level.INFO, "[SessionID]-[{0}];[Connection]-[Data Call Connection Established]", request.getSession()
@@ -98,8 +96,8 @@ public class AngularFileServlet
 		String rangeUpTo = rangeString.substring(rangeString.indexOf('-') + 1, rangeString.indexOf('/'));
 		String totalSize = rangeString.substring(rangeString.indexOf('/') + 1);
 		Long totalS = Long.parseLong(totalSize);
-		Long rangeTotal = Long.parseLong(rangeUpTo);
-		Long remaining = (totalS - 1) - rangeTotal;
+		long rangeTotal = Long.parseLong(rangeUpTo);
+		long remaining = (totalS - 1) - rangeTotal;
 
 		boolean completed = false;
 		if (remaining == 0)

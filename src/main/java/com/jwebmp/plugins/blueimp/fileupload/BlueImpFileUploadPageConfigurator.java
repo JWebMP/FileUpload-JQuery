@@ -30,7 +30,7 @@ import com.jwebmp.plugins.blueimp.gallery.BlueImpGallery;
 import jakarta.validation.constraints.NotNull;
 
 @PluginInformation(pluginName = "BlueImp File Upload",
-		pluginUniqueName = "jwebmp-blueimp-file-upload",
+		pluginUniqueName = "blueimp-file-upload",
 		pluginDescription = "File Upload widget with multiple file selection, drag&drop support, progress bars, validation and preview " +
 		                    "images, audio and video for jQuery.\n" +
 		                    "Supports cross-domain, chunked and resumable file uploads " +
@@ -63,12 +63,12 @@ public class BlueImpFileUploadPageConfigurator
 	 * If this configurator is enabled
 	 */
 	private static boolean enabled = true;
-	private static BlueImpFileUploadDefaultOptions defaultOptions;
+	private static BlueImpFileUploadDefaultOptions<?> defaultOptions;
 	private static boolean renderJqueryUI;
 	/**
 	 * The div for the gallery
 	 */
-	private BlueImpGallery galleryDiv;
+	private BlueImpGallery<?> galleryDiv;
 
 	/**
 	 * Configures the page for this component
@@ -109,11 +109,11 @@ public class BlueImpFileUploadPageConfigurator
 	 * @return
 	 */
 	@NotNull
-	public static BlueImpFileUploadDefaultOptions getDefaultOptions()
+	public static BlueImpFileUploadDefaultOptions<?> getDefaultOptions()
 	{
 		if (BlueImpFileUploadPageConfigurator.defaultOptions == null)
 		{
-			BlueImpFileUploadPageConfigurator.defaultOptions = new BlueImpFileUploadDefaultOptions();
+			BlueImpFileUploadPageConfigurator.defaultOptions = new BlueImpFileUploadDefaultOptions<>();
 		}
 		return BlueImpFileUploadPageConfigurator.defaultOptions;
 	}
@@ -123,7 +123,7 @@ public class BlueImpFileUploadPageConfigurator
 	 *
 	 * @param defaultOptions
 	 */
-	public static void setDefaultOptions(BlueImpFileUploadDefaultOptions defaultOptions)
+	public static void setDefaultOptions(BlueImpFileUploadDefaultOptions<?> defaultOptions)
 	{
 		BlueImpFileUploadPageConfigurator.defaultOptions = defaultOptions;
 	}
@@ -140,7 +140,6 @@ public class BlueImpFileUploadPageConfigurator
 
 	@NotNull
 	@Override
-	@SuppressWarnings("unchecked")
 	 public Page<?> configure(Page<?> page)
 	{
 		if (!page.isConfigured() && enabled())
@@ -245,11 +244,11 @@ public class BlueImpFileUploadPageConfigurator
 	 *
 	 * @return
 	 */
-	public BlueImpGallery getGalleryDiv()
+	public BlueImpGallery<?> getGalleryDiv()
 	{
 		if (galleryDiv == null)
 		{
-			setGalleryDiv(new BlueImpGallery());
+			setGalleryDiv(new BlueImpGallery<>());
 		}
 		return galleryDiv;
 	}
@@ -259,8 +258,7 @@ public class BlueImpFileUploadPageConfigurator
 	 *
 	 * @param galleryDiv
 	 */
-	@SuppressWarnings("unchecked")
-	public void setGalleryDiv(BlueImpGallery galleryDiv)
+	public void setGalleryDiv(BlueImpGallery<?> galleryDiv)
 	{
 		this.galleryDiv = galleryDiv;
 		if (this.galleryDiv != null)
