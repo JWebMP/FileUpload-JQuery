@@ -19,6 +19,8 @@ package com.jwebmp.plugins.blueimp.fileupload.servlets;
 
 import com.google.inject.Singleton;
 import com.jwebmp.core.SessionHelper;
+import com.jwebmp.core.base.ajax.AjaxCall;
+import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.servlets.JWDefaultServlet;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedinjection.pairing.Pair;
@@ -88,10 +90,12 @@ public class AngularFileServlet
 			AngularFileServlet.log.warning("File Upload is not a MultiPart, Incorrect servlet being hit");
 			return;
 		}
-
-		GuiceContext.get(DataCallInterceptorKey)
-		            .forEach(DataCallIntercepter::intercept);
-
+		
+		for (DataCallIntercepter<?> dataCallIntercepter : GuiceContext.get(DataCallInterceptorKey))
+		{
+			dataCallIntercepter.intercept(GuiceContext.get(AjaxCall.class), GuiceContext.get(AjaxResponse.class));
+		}
+		
 		String rangeString = request.getHeader("Content-Range");
 		String rangeUpTo = rangeString.substring(rangeString.indexOf('-') + 1, rangeString.indexOf('/'));
 		String totalSize = rangeString.substring(rangeString.indexOf('/') + 1);

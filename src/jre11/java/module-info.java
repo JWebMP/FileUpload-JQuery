@@ -18,7 +18,6 @@ module com.jwebmp.plugins.blueimp.fileupload {
 	requires org.apache.commons.fileupload;
 
 	requires com.jwebmp.plugins.blueimp.gallery;
-	requires com.jwebmp.interception;
 	requires com.jwebmp.core.angularjs;
 
 	provides com.jwebmp.core.base.angular.services.IAngularConfiguration with com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadDataBinderConfigurationBase;
