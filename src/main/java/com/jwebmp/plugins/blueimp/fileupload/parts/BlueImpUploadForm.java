@@ -1,8 +1,8 @@
 package com.jwebmp.plugins.blueimp.fileupload.parts;
 
-import com.jwebmp.core.SessionHelper;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.Feature;
 import com.jwebmp.core.base.html.Form;
+import com.jwebmp.core.base.html.TableBodyGroup;
 import com.jwebmp.core.base.html.interfaces.children.FormChildren;
 import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadBinderGuiceSiteBinder;
 import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadOptions;
@@ -15,60 +15,69 @@ import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadOptions;
 public class BlueImpUploadForm<J extends BlueImpUploadForm<J>>
 		extends Form<J> implements FormChildren
 {
-
-
-	private BlueImpFileUploadOptions options;
+	private BlueImpFileUploadOptions<?> options = new BlueImpFileUploadOptions<>();
 
 	public BlueImpUploadForm()
 	{
-		addAttribute("action", SessionHelper.getServletUrl() + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL);
+		addAttribute("action", "/" + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL);
 		addAttribute("method", "POST");
 		addAttribute("enc-type", "multipart/form-data");
-		addAttribute("data-file-upload", "options");
-		addAttribute("data-ng-class", "{'fileupload-processing': processing() || loadingFiles}");
-	}
-
-	public BlueImpUploadButtonBar addButtonBar()
-	{
-		BlueImpUploadButtonBar bar = new BlueImpUploadButtonBar();
-		add(bar);
-		return bar;
-	}
-
-	public BlueImpFileUploadTable addDisplayTable()
-	{
-		BlueImpFileUploadTable bar = new BlueImpFileUploadTable();
-		add(bar);
-		return bar;
-	}
-
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			String optionsString = getOptions().toString()
-			                                   .replaceAll("\\s", "");
-			if (!optionsString.trim()
-			                  .isEmpty())
+		BlueImpUploadForm<?> me = this;
+		addFeature(new Feature("blueimpfileupload"){
+			
+			@Override
+			protected void assignFunctionsToComponent()
 			{
-				addAttribute(AngularAttributes.ngInit.getAttributeName(), "options=" + getOptions().toString()
-				                                                                                   .replaceAll("\\s", ""));
+				addQuery(me.getJQueryID() + "fileupload(" + me.getOptions() + ");");
 			}
-		}
-		super.preConfigure();
+		});
 	}
 
+	public BlueImpUploadButtonBar<?> addButtonBar()
+	{
+		BlueImpUploadButtonBar<?> bar = new BlueImpUploadButtonBar<>();
+		add(bar);
+		return bar;
+	}
+
+	public BlueImpFileUploadTable<?> addDisplayTable()
+	{
+		BlueImpFileUploadTable<?> bar = new BlueImpFileUploadTable<>();
+		bar.addClass("table table-striped");
+		bar.addAttribute("role","presentation");
+		bar.add(new TableBodyGroup<>().addClass("files"));
+		add(bar);
+		return bar;
+	}
+	
 	@Override
-	public BlueImpFileUploadOptions getOptions()
+	public BlueImpFileUploadOptions<?> getOptions()
 	{
 		if (options == null)
 		{
-			options = new BlueImpFileUploadOptions();
+			options = new BlueImpFileUploadOptions<>();
 		}
 		return options;
 	}
-
+	
+	@Override
+	public void init()
+	{
+		if (getParent() != null)
+		{
+			var par =findParent(Form.class);
+			if (par != null)
+			{
+				par.addAttribute("action", "/" + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL);
+				par.addAttribute("method", "POST");
+				par.addAttribute("enc-type", "multipart/form-data");
+				
+				setID(par.getID());
+			}
+		}
+		super.init();
+	}
+	
 	@Override
 	public int hashCode()
 	{

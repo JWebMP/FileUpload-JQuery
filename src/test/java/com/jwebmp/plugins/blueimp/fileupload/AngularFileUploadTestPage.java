@@ -18,25 +18,58 @@
 package com.jwebmp.plugins.blueimp.fileupload;
 
 import com.jwebmp.core.Page;
+import com.jwebmp.core.base.html.DivSimple;
+import com.jwebmp.core.base.html.Form;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
-import com.jwebmp.plugins.blueimp.fileupload.parts.BlueImpFileUploadTable;
-import com.jwebmp.plugins.blueimp.fileupload.parts.BlueImpUploadButtonBar;
+import com.jwebmp.plugins.blueimp.fileupload.parts.*;
 
 public class AngularFileUploadTestPage
-		extends Page<AngularFileUploadTestPage>
+		extends DivSimple<AngularFileUploadTestPage>
 {
-
+	
+	public static void main(String[] args)
+	{
+		System.out.println("Building ");
+		System.out.println(new AngularFileUploadTestPage().toString(0));
+		//System.out.println(new DivSimple<>().add(new BlueImpUploadForm()).toString(0));
+		BlueImpUploadForm<?> fileUpload = new BlueImpUploadForm<>();
+		BlueImpUploadButtonBar<?> blueImpUploadButtonBar = fileUpload.addButtonBar()
+		                                                    .addAddButton("btn btn-success", "fas fa-plus", "Add", false)
+		                                                    .addStartButton("btn btn-primary", "fas fa-upload", "Start Upload")
+		                                                    .addCancelButton("btn btn-warning", "fas fa-do-not-enter", "Cancel")
+		                                                    .addDeleteSelected("btn btn-danger", "fas fa-times", "Delete Selected")
+		                                                    .addDeleteCheckbox("", "fa fas-cancel", "Delete Selected")
+		                                                    .addGlobalFileProcessingState()
+		                                                    .addGlobalProgressState();
+		;
+		fileUpload.addDisplayTable();
+		System.out.println("HJere");
+		System.out.println(fileUpload.toString(0));
+		Form f = new Form();
+		f.add(fileUpload);
+		System.out.println("ASdfsad");
+		System.out.println(f.toString(0));
+		
+		DivSimple<?> d = new DivSimple<>();
+		d.add(fileUpload);
+		
+		System.out.println("Renders in div");
+		System.out.println(d.renderJavascript());
+		
+		
+	}
+	
 	public AngularFileUploadTestPage()
 	{
-		BlueImpFileUpload<?> fileUpload = new BlueImpFileUpload();
-		BlueImpUploadButtonBar bar = fileUpload.addButtonBar();
+		BlueImpUploadForm<?> fileUpload = new BlueImpUploadForm();
+		/*BlueImpUploadButtonBar bar = fileUpload.addButtonBar();
 		BlueImpFileUploadTable table = fileUpload.addDisplayTable();
 
 		bar.addAddButton("btn btn-success", "glyphicon glyphicon-plus", "Add Files...", true);
 		bar.addStartButton("btn btn-primary", "glyphicon glyphicon-upload", "Start Upload");
 		bar.addCancelButton("btn btn-warning", "glyphicon glyphicon-ban-circle", "Cancel Upload");
-		bar.addGlobalFileProcessingState();
+		bar.addGlobalFileProcessingState();*/
 
-		add((BodyChildren) fileUpload);
+		add(fileUpload);
 	}
 }

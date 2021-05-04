@@ -17,17 +17,11 @@
 
 package com.jwebmp.plugins.blueimp.fileupload.parts;
 
-import com.jwebmp.core.base.ComponentHierarchyBase;
-import com.jwebmp.core.base.html.*;
-import com.jwebmp.core.base.html.attributes.GlobalAttributes;
+import com.jwebmp.core.base.html.Table;
+import com.jwebmp.core.base.html.TableRow;
 import com.jwebmp.core.base.html.interfaces.children.FormChildren;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
-import com.jwebmp.plugins.blueimp.fileupload.angular.BlueImpFileDestroyController;
-
 import jakarta.validation.constraints.NotNull;
-
-import static com.guicedee.guicedinjection.json.StaticStrings.STRING_EMPTY;
-import static com.jwebmp.core.utilities.StaticStrings.*;
 
 /**
  * The table listing the files available for upload/download
@@ -81,17 +75,17 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 	public BlueImpFileUploadTable()
 	{
 		fileRow = new TableRow<>();
-		fileRow.addAttribute(NgRepeat, "file in queue");
-		fileRow.addAttribute(NgClass, "{'processing': file.$processing()}");
+	//	fileRow.addAttribute(NgRepeat, "file in queue");
+		//fileRow.addAttribute(NgClass, "{'processing': file.$processing()}");
 
-		addClass("ng-cloak");
-		add(fileRow);
+	//	addClass("ng-cloak");
+	//	add(fileRow);
 	}
 
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		/*if (!isConfigured())
 		{
 			if (isShowThumbnail())
 			{
@@ -262,7 +256,7 @@ public class BlueImpFileUploadTable<J extends BlueImpFileUploadTable<J>>
 				fileRow.add(cell);
 			}
 
-		}
+		}*/
 		super.preConfigure();
 	}
 

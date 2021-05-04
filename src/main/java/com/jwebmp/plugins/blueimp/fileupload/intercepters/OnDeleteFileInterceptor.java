@@ -17,11 +17,13 @@
 
 package com.jwebmp.plugins.blueimp.fileupload.intercepters;
 
+import com.guicedee.guicedinjection.interfaces.IDefaultService;
+
 /**
  * Specifies the get file interceptor
  */
 @FunctionalInterface
-public interface OnDeleteFileInterceptor
+public interface OnDeleteFileInterceptor<J extends OnDeleteFileInterceptor<J>> extends IDefaultService<J>
 {
 	void onDeleteFile(String filename);
 }

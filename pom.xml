@@ -29,11 +29,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.plugins.angular</groupId>
-            <artifactId>jwebmp-plugins-angularjs</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.guicedee.services</groupId>
             <artifactId>commons-fileupload</artifactId>
         </dependency>

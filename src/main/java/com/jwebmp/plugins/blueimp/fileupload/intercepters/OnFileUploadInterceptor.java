@@ -1,5 +1,6 @@
 package com.jwebmp.plugins.blueimp.fileupload.intercepters;
 
+import com.guicedee.guicedinjection.interfaces.IDefaultService;
 import com.jwebmp.plugins.blueimp.fileupload.parts.json.JsonFile;
 
 /**
@@ -8,7 +9,7 @@ import com.jwebmp.plugins.blueimp.fileupload.parts.json.JsonFile;
  * Occurs after placed into the session storage (remember to clear session storage properties
  */
 @FunctionalInterface
-public interface OnFileUploadInterceptor
+public interface OnFileUploadInterceptor<J extends OnFileUploadInterceptor<J>> extends IDefaultService<J>
 {
 
 	/**

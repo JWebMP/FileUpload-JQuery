@@ -13,7 +13,7 @@ public class BlueImpFileUploadBinderGuiceSiteBinder
 		implements IGuiceSiteBinder<GuiceSiteInjectorModule>
 {
 	public static final String BLUEIMP_FILEUPLOAD_SERVLETURL = "blueimpangularfileupload";
-	private static final java.util.logging.Logger log = LogFactory.getLog("AngularFileUpload");
+	private static final java.util.logging.Logger log = LogFactory.getLog("BlueImpFileUploadBinderGuiceSiteBinder");
 
 	@Override
 	public void onBind(GuiceSiteInjectorModule module)

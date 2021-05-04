@@ -16,7 +16,6 @@
  */
 package com.jwebmp.plugins.blueimp.fileupload;
 
-import com.jwebmp.core.Component;
 import com.jwebmp.core.Feature;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
@@ -32,8 +31,6 @@ import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadOptions;
 public class BlueImpFileUploadFeature
 		extends Feature<GlobalFeatures, BlueImpFileUploadOptions<?>, BlueImpFileUploadFeature>
 {
-
-
 	private BlueImpFileUploadOptions<?> options;
 
 	/**
@@ -83,5 +80,9 @@ public class BlueImpFileUploadFeature
 		requiredString += getOptions().toString();
 		requiredString += ");" + getNewLine();
 		addQuery(requiredString);
+		
+		
+		
+		
 	}
 }

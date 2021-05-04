@@ -17,6 +17,7 @@
 
 package com.jwebmp.plugins.blueimp.fileupload.intercepters;
 
+import com.guicedee.guicedinjection.interfaces.IDefaultService;
 import com.guicedee.guicedinjection.pairing.Pair;
 
 import java.io.InputStream;
@@ -25,7 +26,7 @@ import java.io.InputStream;
  * Specifies the get thumbnail interceptor
  */
 @FunctionalInterface
-public interface OnThumbnailFileInterceptor
+public interface OnThumbnailFileInterceptor<J extends OnThumbnailFileInterceptor<J>> extends IDefaultService<J>
 {
 
 	/**

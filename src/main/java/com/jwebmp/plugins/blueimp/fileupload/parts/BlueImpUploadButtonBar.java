@@ -19,6 +19,7 @@ package com.jwebmp.plugins.blueimp.fileupload.parts;
 
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.*;
+import com.jwebmp.core.base.html.inputs.InputCheckBoxType;
 import com.jwebmp.core.base.html.inputs.InputFileType;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 
@@ -32,11 +33,12 @@ public class BlueImpUploadButtonBar<J extends BlueImpUploadButtonBar<J>>
 {
 
 	private DivSimple<?> buttonBarContainerDiv;
+	private InputFileType<?> fileInput = new InputFileType<>();
 
 	public BlueImpUploadButtonBar()
 	{
-		addClass("fileupload-buttonbar");
-		buttonBarContainerDiv = new DivSimple<>();
+		addClass("row fileupload-buttonbar");
+		buttonBarContainerDiv = new DivSimple<>().addClass("col_lg_7");
 		add(buttonBarContainerDiv);
 	}
 
@@ -52,12 +54,13 @@ public class BlueImpUploadButtonBar<J extends BlueImpUploadButtonBar<J>>
 		}
 
 		span.addClass("fileinput-button");
-		span.addAttribute("ng-class", "{disabled: disabled}");
+		//span.addAttribute("ng-class", "{disabled: disabled}");
 
 		if (iconClass != null && !iconClass.isEmpty())
 		{
 			Italic i = new Italic();
 			i.addClass(iconClass);
+			i.addClass("ml-1");
 			span.add(i);
 		}
 
@@ -67,17 +70,16 @@ public class BlueImpUploadButtonBar<J extends BlueImpUploadButtonBar<J>>
 			labelSpan.setText(label);
 			span.add(labelSpan);
 		}
-
-		InputFileType<?> fileInput = new InputFileType<>();
+		
 		fileInput.setName("files[]");
-		fileInput.addAttribute("ng-disabled", "disabled");
+	//	fileInput.addAttribute("ng-disabled", "disabled");
 
 		if (multiple)
 		{
 			addAttribute("multiple", STRING_EMPTY);
 		}
 		span.add(fileInput);
-
+		span.addClass("mr-1");
 		buttonBarContainerDiv.add(span);
 		return (J) this;
 	}
@@ -92,13 +94,14 @@ public class BlueImpUploadButtonBar<J extends BlueImpUploadButtonBar<J>>
 			b.addClass(displayClass);
 		}
 		b.addClass("start");
-
-		b.addAttribute("data-ng-click", "submit()");
+		b.addClass("mr-1");
+	//	b.addAttribute("data-ng-click", "submit()");
 
 		if (iconClass != null && !iconClass.isEmpty())
 		{
 			Italic i = new Italic();
 			i.addClass(iconClass);
+			i.addClass("mr-1");
 			b.add(i);
 		}
 		if (label != null && !label.isEmpty())
@@ -122,13 +125,14 @@ public class BlueImpUploadButtonBar<J extends BlueImpUploadButtonBar<J>>
 			b.addClass(displayClass);
 		}
 		b.addClass("cancel");
-
-		b.addAttribute("data-ng-click", "cancel()");
+		b.addClass("mr-1");
+	//	b.addAttribute("data-ng-click", "cancel()");
 
 		if (iconClass != null && !iconClass.isEmpty())
 		{
 			Italic i = new Italic();
 			i.addClass(iconClass);
+			i.addClass("mr-1");
 			b.add(i);
 		}
 		if (label != null && !label.isEmpty())
@@ -139,6 +143,52 @@ public class BlueImpUploadButtonBar<J extends BlueImpUploadButtonBar<J>>
 		}
 		buttonBarContainerDiv.add(b);
 
+		return (J) this;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J addDeleteSelected(String displayClass, String iconClass, String label)
+	{
+		Button b = new Button<>();
+		if (displayClass != null && !displayClass.isEmpty())
+		{
+			b.addClass(displayClass);
+		}
+		b.addClass("delete");
+		b.addClass("mr-1");
+		
+	//	b.addAttribute("data-ng-click", "delete()");
+		
+		if (iconClass != null && !iconClass.isEmpty())
+		{
+			Italic i = new Italic();
+			i.addClass(iconClass);
+			i.addClass("mr-1");
+			b.add(i);
+		}
+		if (label != null && !label.isEmpty())
+		{
+			Span span = new Span();
+			span.setText(label);
+			b.add(span);
+		}
+		buttonBarContainerDiv.add(b);
+		
+		return (J) this;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J addDeleteCheckbox(String displayClass, String iconClass, String label)
+	{
+		InputCheckBoxType<?> b = new InputCheckBoxType<>();
+		if (displayClass != null && !displayClass.isEmpty())
+		{
+			b.addClass(displayClass);
+		}
+		b.addClass("toggle");
+		buttonBarContainerDiv.add(b);
 		return (J) this;
 	}
 
@@ -154,14 +204,33 @@ public class BlueImpUploadButtonBar<J extends BlueImpUploadButtonBar<J>>
 
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J addGlobalProgressState(Div divToApplyTo, ComponentHierarchyBase progressBarContainer, ComponentHierarchyBase progressBar)
+	public J addGlobalProgressState()
 	{
-		divToApplyTo.addAttribute("data-ng-class", "{in: active()}");
-		progressBarContainer.addAttribute("data-file-upload-progress", "progress()");
-		progressBar.addAttribute("data-ng-style", "{width: num + '%'}");
-
-		divToApplyTo.add(new DivSimple<>().addClass("progress-extended")
-		                                  .setText(HTML_TAB));
+		DivSimple<?> globalProcessState = new DivSimple<>().addClass("col-lg-5")
+				.addClass("fileupload-progress")
+				.addClass("fade");
+		DivSimple<?> progressSection = new DivSimple<>();
+		progressSection.addClass("progress")
+		           .addClass("progress-striped")
+		           .addClass("active")
+		           .addAttribute("role", "progressbar")
+		           .addAttribute("aria-valuemin", "0")
+		           .addAttribute("aria-valuemax", "100");
+		DivSimple<?> progressBar = new DivSimple<>();
+		progressBar.addClass("progress-bar")
+		           .addClass("progress-bar-success")
+		           .addStyle("width", "0%");
+		
+		progressSection.add(progressBar);
+		globalProcessState.add(progressSection);
+		
+		DivSimple<?> progressExtended = new DivSimple<>();
+		progressExtended.addClass("progress-extended")
+		                .setText(HTML_TAB);
+		
+		globalProcessState.add(progressExtended);
+		
+		add(globalProcessState);
 		return (J) this;
 	}
 
@@ -175,5 +244,10 @@ public class BlueImpUploadButtonBar<J extends BlueImpUploadButtonBar<J>>
 	public boolean equals(Object o)
 	{
 		return super.equals(o);
+	}
+	
+	public InputFileType<?> getFileInput()
+	{
+		return fileInput;
 	}
 }
