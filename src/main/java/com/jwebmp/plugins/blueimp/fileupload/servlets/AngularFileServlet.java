@@ -63,6 +63,7 @@ import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 /**
  * The default file receiving servlet
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 @Singleton
 @MultipartConfig
 public class AngularFileServlet
@@ -128,6 +129,12 @@ public class AngularFileServlet
 			completed = true;
 		}
 		
+		String namedCollector = request.getParameter("uploadCollectorName");
+		if(Strings.isNullOrEmpty(namedCollector))
+		{
+			namedCollector = "";
+		}
+		
 		ServletFileUpload uploadHandler = new ServletFileUpload(new DiskFileItemFactory());
 		JsonFilesArray filesArray = new JsonFilesArray();
 		try
@@ -137,7 +144,7 @@ public class AngularFileServlet
 			{
 				if (!item.isFormField())
 				{
-					processUploadedFile(completed, totalS, item, filesArray);
+					processUploadedFile(completed, totalS, item, filesArray,namedCollector);
 				}
 			}
 		}
@@ -188,30 +195,39 @@ public class AngularFileServlet
 	{
 		String filename = request.getParameter(AngularFileServlet.getFileMethod);
 		Set<OnGetFileInterceptor> intercepters = IDefaultService.loaderToSet(ServiceLoader.load(OnGetFileInterceptor.class));
-		if (intercepters == null || intercepters.isEmpty())
+		if (intercepters.isEmpty())
 		{
 			AngularFileServlet.log.warning(
 					"There are no file getter interceptors to catch this file get. Create a class that implements " + "OnGetFileInterceptor to deliver this file.");
 		}
 		else
 		{
-			intercepters.forEach(a ->
+			for (OnGetFileInterceptor a : intercepters)
 			{
-				Pair<String, InputStream> is = a.onGetFile(filename);
-				// String mimeType = new Tika().detect(is.getKey());
-				// response.setContentType(mimeType);
-				response.setHeader("Content-Disposition", "inline; filename=\"" + is.getKey() + "\"");
-				try
+				String namedCollector = request.getParameter("uploadCollectorName");
+				if(Strings.isNullOrEmpty(namedCollector))
 				{
-					IOUtils.copyLarge(is.getValue(), response.getOutputStream());
-					is.getValue()
-					  .close();
+					namedCollector = "";
 				}
-				catch (IOException e)
+				if (a.name()
+				     .equals(namedCollector))
 				{
-					AngularFileServlet.log.log(Level.SEVERE, "Unable to deliver file when input stream is transferred to output stream", e);
+					Pair<String, InputStream> is = a.onGetFile(filename);
+					// String mimeType = new Tika().detect(is.getKey());
+					// response.setContentType(mimeType);
+					response.setHeader("Content-Disposition", "inline; filename=\"" + is.getKey() + "\"");
+					try
+					{
+						IOUtils.copyLarge(is.getValue(), response.getOutputStream());
+						is.getValue()
+						  .close();
+					}
+					catch (IOException e)
+					{
+						AngularFileServlet.log.log(Level.SEVERE, "Unable to deliver file when input stream is transferred to output stream", e);
+					}
 				}
-			});
+			}
 		}
 	}
 	
@@ -220,26 +236,33 @@ public class AngularFileServlet
 		String filename = request.getParameter(AngularFileServlet.deleteFileMethod);
 		
 		Set<OnDeleteFileInterceptor> intercepters = IDefaultService.loaderToSet(ServiceLoader.load(OnDeleteFileInterceptor.class));
-		if (intercepters == null || intercepters.isEmpty())
+		if (intercepters.isEmpty())
 		{
 			AngularFileServlet.log.warning(
 					"There are no file delete interceptors to catch this file delete. Create a class that implements " + "OnDeleteFileInterceptor to delete this file.");
 		}
 		else
 		{
-			intercepters.forEach(a ->
+			for (OnDeleteFileInterceptor a : intercepters)
 			{
+				String namedCollector = request.getParameter("uploadCollectorName");
+				if(Strings.isNullOrEmpty(namedCollector))
+				{
+					namedCollector = "";
+				}
+				if(a.name().equals(namedCollector))
 				a.onDeleteFile(filename);
-			});
+			}
 		}
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private void processGetThumb(HttpServletRequest request, HttpServletResponse response)
 	{
 		String filename = request.getParameter(AngularFileServlet.getThumbMethod);
 		
 		Set<OnThumbnailFileInterceptor> intercepters = IDefaultService.loaderToSet(ServiceLoader.load(OnThumbnailFileInterceptor.class));
-		if (intercepters == null || intercepters.isEmpty())
+		if (intercepters.isEmpty())
 		{
 			AngularFileServlet.log.warning(
 					"There are no file get thumbnail interceptors to catch this file thumbnail. Create a class that implements " +
@@ -247,28 +270,35 @@ public class AngularFileServlet
 		}
 		else
 		{
-			intercepters.forEach(a ->
+			for (OnThumbnailFileInterceptor<?> a : intercepters)
 			{
-				
-				Pair<String, InputStream> is = a.onThumbnailGet(filename);
-				response.setContentType("application/json");
-				response.setHeader("Content-Disposition", "inline; filename=\"" + filename + "\"");
-				//String mimeType = new Tika().detect(is.getKey());
-				try
+				String namedCollector = request.getParameter("uploadCollectorName");
+				if(Strings.isNullOrEmpty(namedCollector))
 				{
-					IOUtils.copyLarge(is.getValue(), response.getOutputStream());
-					is.getValue()
-					  .close();
+					namedCollector = "";
 				}
-				catch (IOException e)
+				if(a.name().equals(namedCollector))
 				{
-					AngularFileServlet.log.log(Level.SEVERE, "Unable to deliver file when input stream is transferred to output stream", e);
+					Pair<String, InputStream> is = a.onThumbnailGet(filename);
+					response.setContentType("application/json");
+					response.setHeader("Content-Disposition", "inline; filename=\"" + filename + "\"");
+					//String mimeType = new Tika().detect(is.getKey());
+					try
+					{
+						IOUtils.copyLarge(is.getValue(), response.getOutputStream());
+						is.getValue()
+						  .close();
+					}
+					catch (IOException e)
+					{
+						AngularFileServlet.log.log(Level.SEVERE, "Unable to deliver file when input stream is transferred to output stream", e);
+					}
 				}
-			});
+			}
 		}
 	}
 	
-	private void processUploadedFile(boolean completed, Long totalS, FileItem item, JsonFilesArray filesArray) throws IOException
+	private void processUploadedFile(boolean completed, Long totalS, FileItem item, JsonFilesArray filesArray,String namedCollector) throws IOException
 	{
 		String fileUploadIdentifier = item.getName() + "|" + totalS + "|" + item.getFieldName();
 		if (!AngularFileServlet.stringFileMap.containsKey(fileUploadIdentifier))
@@ -291,16 +321,16 @@ public class AngularFileServlet
 			file.setType(item.getContentType());
 			//todo this stream should close
 			
-			file.setDownloadUrl(SessionHelper.getServerPath() + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?getfile=" + item.getName());
-			file.setThumbnailUrl(SessionHelper.getServerPath() + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?getthumb=" + item.getName());
-			file.setDeleteUrl(SessionHelper.getServerPath() + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?delfile=" + item.getName());
+			file.setDownloadUrl(SessionHelper.getServerPath() + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?getfile=" + item.getName() + "&uploadCollectorName=" + namedCollector );
+			file.setThumbnailUrl(SessionHelper.getServerPath() + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?getthumb=" + item.getName() + "&uploadCollectorName=" + namedCollector );
+			file.setDeleteUrl(SessionHelper.getServerPath() + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?delfile=" + item.getName() + "&uploadCollectorName=" + namedCollector );
 			
 			filesArray.getAllFiles()
 			          .add(file);
 			
 			Set<OnFileUploadInterceptor> intercepters = IDefaultService.loaderToSet(ServiceLoader.load(OnFileUploadInterceptor.class));
 			
-			if (intercepters == null || intercepters.isEmpty())
+			if (intercepters.isEmpty())
 			{
 				AngularFileServlet.log.warning(
 						"There are no file upload interceptors to catch this file upload. Create a class that implements " + "OnFileUploadInterceptor to use this file.");
@@ -309,7 +339,12 @@ public class AngularFileServlet
 			{
 				for (OnFileUploadInterceptor a : intercepters)
 				{
-					a.onUploadCompleted(file);
+					if(Strings.isNullOrEmpty(namedCollector))
+					{
+						namedCollector = "";
+					}
+					if(a.name().equals(namedCollector))
+						a.onUploadCompleted(file);
 				}
 			}
 			

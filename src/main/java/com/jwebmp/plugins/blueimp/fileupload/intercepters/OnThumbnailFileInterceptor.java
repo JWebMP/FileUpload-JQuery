@@ -25,10 +25,17 @@ import java.io.InputStream;
 /**
  * Specifies the get thumbnail interceptor
  */
-@FunctionalInterface
 public interface OnThumbnailFileInterceptor<J extends OnThumbnailFileInterceptor<J>> extends IDefaultService<J>
 {
-
+	/**
+	 * The name of the uploader to use - identifies which interceptor to use
+	 *
+	 * @return
+	 */
+	default String name()
+	{
+		return "";
+	}
 	/**
 	 * Returns the thumbnail in line with the given output filename
 	 *

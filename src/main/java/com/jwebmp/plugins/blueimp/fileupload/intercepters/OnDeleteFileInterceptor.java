@@ -22,8 +22,16 @@ import com.guicedee.guicedinjection.interfaces.IDefaultService;
 /**
  * Specifies the get file interceptor
  */
-@FunctionalInterface
 public interface OnDeleteFileInterceptor<J extends OnDeleteFileInterceptor<J>> extends IDefaultService<J>
 {
+	/**
+	 * The name of the uploader to use - identifies which interceptor to use
+	 *
+	 * @return
+	 */
+	default String name()
+	{
+		return "";
+	}
 	void onDeleteFile(String filename);
 }

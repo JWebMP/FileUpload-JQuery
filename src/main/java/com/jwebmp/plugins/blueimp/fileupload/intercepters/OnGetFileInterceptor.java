@@ -8,10 +8,17 @@ import java.io.InputStream;
 /**
  * Specifies the get file interceptor
  */
-@FunctionalInterface
 public interface OnGetFileInterceptor<J extends OnGetFileInterceptor<J>> extends IDefaultService<J>
 {
-
+	/**
+	 * The name of the uploader to use - identifies which interceptor to use
+	 *
+	 * @return
+	 */
+	default String name()
+	{
+		return "";
+	}
 	/**
 	 * Returns the stream for the the output filename
 	 *
