@@ -280,6 +280,10 @@ public class AngularFileServlet
 				if(a.name().equals(namedCollector))
 				{
 					Pair<String, InputStream> is = a.onThumbnailGet(filename);
+					if (is == null)
+					{
+						continue;
+					}
 					response.setContentType("application/json");
 					response.setHeader("Content-Disposition", "inline; filename=\"" + filename + "\"");
 					//String mimeType = new Tika().detect(is.getKey());
@@ -298,7 +302,7 @@ public class AngularFileServlet
 		}
 	}
 	
-	private void processUploadedFile(boolean completed, Long totalS, FileItem item, JsonFilesArray filesArray,String namedCollector) throws IOException
+	private synchronized void processUploadedFile(boolean completed, Long totalS, FileItem item, JsonFilesArray filesArray,String namedCollector) throws IOException
 	{
 		String fileUploadIdentifier = item.getName() + "|" + totalS + "|" + item.getFieldName();
 		if (!AngularFileServlet.stringFileMap.containsKey(fileUploadIdentifier))
