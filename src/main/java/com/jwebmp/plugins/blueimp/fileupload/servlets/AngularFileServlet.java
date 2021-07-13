@@ -168,20 +168,17 @@ public class AngularFileServlet
 		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
 		HttpServletResponse response = GuiceContext.get(GuicedServletKeys.getHttpServletResponseKey());
 		
-		if (request.getParameter(AngularFileServlet.getFileMethod) != null && !request.getParameter(AngularFileServlet.getFileMethod)
-		                                                                              .isEmpty())
+		if (request.getParameter(AngularFileServlet.getFileMethod) != null)
 		{
 			
 			processGetFile(request, response);
 			
 		}
-		else if (request.getParameter(AngularFileServlet.deleteFileMethod) != null && !request.getParameter(AngularFileServlet.deleteFileMethod)
-		                                                                                      .isEmpty())
+		else if (request.getParameter(AngularFileServlet.deleteFileMethod) != null)
 		{
 			processDeleteFile(request);
 		}
-		else if (request.getParameter(AngularFileServlet.getThumbMethod) != null && !request.getParameter(AngularFileServlet.getThumbMethod)
-		                                                                                    .isEmpty())
+		else if (request.getParameter(AngularFileServlet.getThumbMethod) != null)
 		{
 			processGetThumb(request, response);
 		}
