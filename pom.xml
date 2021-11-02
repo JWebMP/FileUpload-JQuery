@@ -12,9 +12,11 @@
     <packaging>jar</packaging>
 
     <name>BlueImp File Upload</name>
-    <description>File Upload widget with multiple file selection, drag and drop support, progress bar, validation and preview images, audio and video for jQuery.
+    <description>File Upload widget with multiple file selection, drag and drop support, progress bar, validation and
+        preview images, audio and video for jQuery.
         Supports cross-domain, chunked and resumable file uploads.
-        Works with any server-side platform (Google App Engine, PHP, Python, Ruby on Rails, Java, etc.) that supports standard HTML form file uploads.
+        Works with any server-side platform (Google App Engine, PHP, Python, Ruby on Rails, Java, etc.) that supports
+        standard HTML form file uploads.
     </description>
     <url>https://github.com/GedMarc/JWebMP-BlueImpFileUpload</url>
 
@@ -123,6 +125,22 @@
                     <include>**/*.xml</include>
                     <include>**/*.txt</include>
                 </includes>
+            </resource><resource>
+                <directory>jar-resources</directory>
+                <targetPath>${project.build.outputDirectory}/META-INF/resources/</targetPath>
+                <excludes>
+                    <exclude>**/*.gzip</exclude>
+                    <exclude>**/*.md</exclude>
+                    <exclude>**/*.md</exclude>
+                    <exclude>**/package.json</exclude>
+                    <exclude>**/bower.json</exclude>
+                    <exclude>**/.bower.json</exclude>
+                    <exclude>**/.gitignore</exclude>
+                    <exclude>**/.jshint</exclude>
+                    <exclude>**/.jshint</exclude>
+                    <exclude>**/Gruntfile.js</exclude>
+                    <exclude>**/*.sh</exclude>
+                </excludes>
             </resource>
         </resources>
 
