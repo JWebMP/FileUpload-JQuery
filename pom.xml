@@ -10,7 +10,7 @@
     <groupId>com.jwebmp.plugins.blueimp</groupId>
     <artifactId>jwebmp-blueimp-fileupload</artifactId>
     <packaging>jar</packaging>
-
+    <version>0.0.0_0-SNAPSHOT</version>
     <name>BlueImp File Upload</name>
     <description>File Upload widget with multiple file selection, drag and drop support, progress bar, validation and
         preview images, audio and video for jQuery.
