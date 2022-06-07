@@ -10,15 +10,13 @@ module com.jwebmp.plugins.blueimp.fileupload {
 	exports com.jwebmp.plugins.blueimp.fileupload.parts;
 	exports com.jwebmp.plugins.blueimp.fileupload.parts.json;
 
-	requires com.jwebmp.core;
 	requires com.guicedee.guicedservlets;
-
-	requires jakarta.validation;
 
 	requires org.apache.commons.io;
 	requires org.apache.commons.fileupload;
 
 	requires com.jwebmp.plugins.blueimp.gallery;
+	requires com.jwebmp.plugins.jqueryui;
 	
 	uses OnDeleteFileInterceptor;
 	uses OnFileUploadInterceptor;
@@ -30,8 +28,6 @@ module com.jwebmp.plugins.blueimp.fileupload {
 	provides com.guicedee.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadBinderGuiceSiteBinder;
 	provides com.guicedee.guicedinjection.interfaces.IGuiceScanModuleInclusions with BlueImpFileUploadInclusionModule;
 	
-	provides com.guicedee.guicedinjection.interfaces.IGuiceScanModuleExclusions with com.jwebmp.plugins.blueimp.fileupload.implementations.BlueImpFileUploadExclusionsModule;
-
 	opens com.jwebmp.plugins.blueimp.fileupload to com.fasterxml.jackson.databind, com.jwebmp.core, com.google.guice;
 	opens com.jwebmp.plugins.blueimp.fileupload.options to com.fasterxml.jackson.databind, com.jwebmp.core, com.google.guice;
 	opens com.jwebmp.plugins.blueimp.fileupload.interfaces to com.fasterxml.jackson.databind, com.jwebmp.core, com.google.guice;

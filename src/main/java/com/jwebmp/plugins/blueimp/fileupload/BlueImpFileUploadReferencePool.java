@@ -16,6 +16,7 @@
  */
 package com.jwebmp.plugins.blueimp.fileupload;
 
+import com.jwebmp.core.base.angular.client.annotations.angularconfig.*;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.interfaces.ReferencePool;
@@ -26,123 +27,58 @@ import com.jwebmp.core.base.servlets.interfaces.ReferencePool;
  * @author GedMarc
  * @since 20 Apr 2016
  */
+@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-tmpl/js/tmpl.js",sortOrder = 800)
+
+
+@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-load-image/js/vendor/jquery.Jcrop.js",sortOrder = 805)
+@NgStyleSheet("app/blueimp/blueimpfileupload/blueimp-load-image/css/vendor/jquery.Jcrop.css")
+
+
+@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-load-image/js/load-image.all.min.js",sortOrder = 810)
+
+/*
+
+@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-load-image/js/load-image-exif.js",sortOrder = 815)
+
+
+@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-load-image/js/load-image-meta.js",sortOrder = 815)
+
+
+@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-load-image/js/load-image-exif-map.js",sortOrder = 820)
+
+
+@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-load-image/js/load-image.js",sortOrder = 825)
+*/
+
+@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-canvas-to-blob/js/canvas-to-blob.js",sortOrder = 830)
+
+@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.fileupload.js",sortOrder = 835)
+@NgStyleSheet("app/blueimp/blueimpfileupload/blueimpfileupload/css/jquery.fileupload.css")
+
+
+//@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.fileupload-audio.js",sortOrder = 840)
+
+/*
+
+@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.fileupload-image.js",sortOrder = 845)
+
+
+@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.fileupload-process.js",sortOrder = 850)
+
+
+@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.fileupload-validate.js",sortOrder = 855)
+*/
+
+
+@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.iframe-transport.js",sortOrder = 860)
+
+/*@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.fileupload-video.js",sortOrder = 865)*/
+
+//@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.fileupload-ui.js",sortOrder = 870)
+
+
+
 public enum BlueImpFileUploadReferencePool
-		implements ReferencePool
 {
-	/**
-	 * Display Template
-	 */
-	TemplatesReference(new JavascriptReference("TemplatesReference", 9.22, "bower_components/blueimp-tmpl/js/tmpl.js"),
-	                   null),
-	LoadImageJCropReference(new JavascriptReference("LoadImageJCropReference", 9.22, "bower_components/blueimp-load-image/js/vendor/jquery.Jcrop.js"),
-			new CSSReference("LoadImageJCropReference", 9.22, "bower_components/blueimp-load-image/css/vendor/jquery.Jcrop.css")),
-	
-	LoadImageAll(new JavascriptReference("LoadImageExifReference", 9.22, "bower_components/blueimp-load-image/js/load-image.all.min.js"),
-			null),
-	
-	LoadImageExifReference(new JavascriptReference("LoadImageExifReference", 9.22, "bower_components/blueimp-load-image/js/load-image-exif.js"),
-	                       null),
-	LoadImageMetaReference(new JavascriptReference("LoadImageMetaReference", 9.22, "bower_components/blueimp-load-image/js/load-image-meta.js"),
-	                       null),
-	LoadImageExifMapReference(new JavascriptReference("LoadImageExifMapReference", 9.22, "bower_components/blueimp-load-image/js/load-image-exif-map.js"),
-	                          null),
-	LoadImageReference(new JavascriptReference("LoadImageReference", 9.22, "bower_components/blueimp-load-image/js/load-image.js"),
-	                   null),
-
-	CanvasToBlobReference(new JavascriptReference("CanvasToBlobReference", 9.22, "bower_components/blueimp-canvas-to-blob/js/canvas-to-blob.js"),
-	                      null),
-
-	FileUploadReference(new JavascriptReference("FileUploadReference", 9.22, "bower_components/blueimpfileupload/js/jquery.fileupload.js"),
-	                    new CSSReference("FileUploadReferenceCSS", 9.22, "bower_components/blueimpfileupload/css/jquery.fileupload.css")),
-
-	FileUploadAudioReference(new JavascriptReference("FileUploadAudioReference", 9.22, "bower_components/blueimpfileupload/js/jquery.fileupload-audio.js"),
-	                         null),
-
-	FileUploadImageReference(new JavascriptReference("FileUploadImageReference", 9.22, "bower_components/blueimpfileupload/js/jquery.fileupload-image.js"),
-	                         null),
-	FileUploadProcessReference(new JavascriptReference("FileUploadProcessReference", 9.22, "bower_components/blueimpfileupload/js/jquery.fileupload-process.js"),
-	                           null),
-	FileUploadValidateReference(new JavascriptReference("FileUploadValidateReference", 9.22, "bower_components/blueimpfileupload/js/jquery.fileupload-validate.js"),
-	                            null),
-	FileUploadIFrameTransportReference(
-			new JavascriptReference("FileUploadIFrameTransportReference", 9.22, "bower_components/blueimpfileupload/js/jquery.iframe-transport.js"),
-			null),
-	FileUploadVideoReference(new JavascriptReference("FileUploadVideoReference", 9.22, "bower_components/blueimpfileupload/js/jquery.fileupload-video.js"),
-	                         null),
-
-	FileUploadUIReference(new JavascriptReference("FileUploadUIReference", 9.22, "bower_components/blueimpfileupload/js/jquery.fileupload-ui.js"),
-	                      new CSSReference("FileUploadUIReference", 9.22, "bower_components/blueimpfileupload/css/jquery.fileupload-ui.css")),
-
-	FileUploadAngularReference(new JavascriptReference("FileUploadAngularReference", 9.22, "bower_components/blueimpfileupload/js/jquery.fileupload-angular.js"), null);
-	/**
-	 * The actual javascript
-	 */
-	private JavascriptReference javaScriptReference;
-	/**
-	 * The actual css reference
-	 */
-	private CSSReference cssReference;
-
-	/**
-	 * Constructs a reference pool
-	 */
-	BlueImpFileUploadReferencePool()
-	{
-	}
-
-	/**
-	 * Constructs a new reference pool
-	 *
-	 * @param javaScriptReference
-	 * @param cssReference
-	 */
-	BlueImpFileUploadReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
-	{
-		this.javaScriptReference = javaScriptReference;
-		this.cssReference = cssReference;
-	}
-
-	/**
-	 * Gets the cSS reference
-	 *
-	 * @return
-	 */
-	@Override
-	public CSSReference getCssReference()
-	{
-		return cssReference;
-	}
-
-	/**
-	 * Sets the CSS Reference
-	 *
-	 * @param cssReference
-	 */
-	@Override
-	public void setCssReference(CSSReference cssReference)
-	{
-		this.cssReference = cssReference;
-	}
-
-	/**
-	 * Returns the javascript reference
-	 *
-	 * @return
-	 */
-	@Override
-	public JavascriptReference getJavaScriptReference()
-	{
-		return javaScriptReference;
-	}
-
-	/**
-	 * Sets the javascript reference
-	 *
-	 * @param javaScriptReference
-	 */
-	@Override
-	public void setJavaScriptReference(JavascriptReference javaScriptReference)
-	{
-		this.javaScriptReference = javaScriptReference;
-	}
+//	FileUploadAngularReference(new JavascriptReference("FileUploadAngularReference", 9.22, "bower_components/blueimpfileupload/js/jquery.fileupload-angular.js"), null);
 }

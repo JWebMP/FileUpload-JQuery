@@ -17,17 +17,14 @@
 
 package com.jwebmp.plugins.blueimp.fileupload;
 
-import com.google.inject.Singleton;
-import com.jwebmp.core.Page;
-import com.jwebmp.core.base.html.Paragraph;
-import com.jwebmp.core.base.references.JavascriptReference;
-import com.jwebmp.core.plugins.PluginInformation;
-import com.jwebmp.core.plugins.PluginStatus;
-import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
-import com.jwebmp.core.services.IPageConfigurator;
-import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadDefaultOptions;
-import com.jwebmp.plugins.blueimp.gallery.BlueImpGallery;
-import jakarta.validation.constraints.NotNull;
+import com.google.inject.*;
+import com.jwebmp.core.*;
+import com.jwebmp.core.base.html.*;
+import com.jwebmp.core.plugins.*;
+import com.jwebmp.core.services.*;
+import com.jwebmp.plugins.blueimp.fileupload.options.*;
+import com.jwebmp.plugins.blueimp.gallery.*;
+import jakarta.validation.constraints.*;
 
 @PluginInformation(pluginName = "BlueImp File Upload",
                    pluginUniqueName = "blueimp-file-upload",
@@ -143,106 +140,6 @@ public class BlueImpFileUploadPageConfigurator
 	{
 		if (!page.isConfigured() && enabled())
 		{
-			registerModules();
-			
-			page.getBody()
-			    .add(getGalleryDiv());
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.TemplatesReference.getJavaScriptReference()
-			                                                                             .setSortOrder(200));
-			
-		/*	page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.LoadImageAll.getJavaScriptReference()
-			                                                                                  .setSortOrder(201));*/
-			page.getBody()
-			    .addCssReference(BlueImpFileUploadReferencePool.LoadImageJCropReference.getCssReference()
-			                                                                           .setSortOrder(202));
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.LoadImageAll.getJavaScriptReference()
-			                                                                             .setSortOrder(203));
-			/*
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.LoadImageReference.getJavaScriptReference()
-			                                                                             .setSortOrder(203));
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.LoadImageMetaReference.getJavaScriptReference()
-			                                                                                 .setSortOrder(204));
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.LoadImageExifReference.getJavaScriptReference()
-			                                                                                 .setSortOrder(205));
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.LoadImageExifMapReference.getJavaScriptReference()
-			                                                                                    .setSortOrder(206));*/
-			
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.CanvasToBlobReference.getJavaScriptReference()
-			                                                                                .setSortOrder(207));
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadIFrameTransportReference.getJavaScriptReference()
-			                                                                                             .setSortOrder(217));
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadReference.getJavaScriptReference()
-			                                                                              .setSortOrder(218));
-			page.getBody()
-			    .addCssReference(BlueImpFileUploadReferencePool.FileUploadReference.getCssReference()
-			                                                                       .setSortOrder(219));
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadProcessReference.getJavaScriptReference()
-			                                                                                     .setSortOrder(220));
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadAudioReference.getJavaScriptReference()
-			                                                                                   .setSortOrder(221));
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadImageReference.getJavaScriptReference()
-			                                                                                   .setSortOrder(222));
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadValidateReference.getJavaScriptReference()
-			                                                                                      .setSortOrder(223));
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadVideoReference.getJavaScriptReference()
-			                                                                                   .setSortOrder(224));
-			
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadUIReference.getJavaScriptReference()
-			                                                                                .setSortOrder(225));
-			
-			page.getBody()
-			    .addCssReference(BlueImpFileUploadReferencePool.FileUploadUIReference.getCssReference()
-			                                                                                .setSortOrder(225));
-			
-			
-/*
-			page.getBody()
-			    .addJavaScriptReference(BlueImpFileUploadReferencePool.FileUploadAngularReference.getJavaScriptReference()
-			                                                                                     .setSortOrder(227));*/
-			
-	/*		page.getBody()
-			    .addJavaScriptReference(new JavascriptReference("blueimpfileuploadtemplateupload", 1.0, "blueimpfileupload/templateupload.js")
-					    .setSortOrder(1000)
-					    .setCanMinifyAtRemote(false)
-			    .setScriptType("text/x-tmpl"));
-			
-			page.getBody()
-			    .addJavaScriptReference(new JavascriptReference("blueimpfileuploadtemplatedownload", 1.0, "blueimpfileupload/templatedownload.js")
-					    .setCanMinifyAtRemote(false)
-					    .setSortOrder(1001)
-					    .setScriptType("text/x-tmpl"));
-			*/
-			
 			page.getBody().add(new Paragraph<>("<script id=\"template-upload\" type=\"text/x-tmpl\">\n" +
 			                                   "      {% for (var i=0, file; file=o.files[i]; i++) { %}\n" +
 			                                   "          <tr class=\"template-upload {%=o.options.loadImageFileTypes.test(file.type)?' image':''%}\">\n" +
@@ -331,11 +228,6 @@ public class BlueImpFileUploadPageConfigurator
 	public boolean enabled()
 	{
 		return BlueImpFileUploadPageConfigurator.enabled;
-	}
-	
-	private void registerModules()
-	{
-		JQueryPageConfigurator.setRequired(true);
 	}
 	
 	/**
