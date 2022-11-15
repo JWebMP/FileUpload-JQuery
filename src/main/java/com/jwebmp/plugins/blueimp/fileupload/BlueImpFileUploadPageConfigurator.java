@@ -61,7 +61,7 @@ public class BlueImpFileUploadPageConfigurator
 	 */
 	private static boolean enabled = true;
 	private static BlueImpFileUploadDefaultOptions<?> defaultOptions;
-	private static boolean renderJqueryUI;
+
 	/**
 	 * The div for the gallery
 	 */
@@ -124,25 +124,16 @@ public class BlueImpFileUploadPageConfigurator
 		BlueImpFileUploadPageConfigurator.defaultOptions = defaultOptions;
 	}
 	
-	public static boolean isRenderJqueryUI()
-	{
-		return BlueImpFileUploadPageConfigurator.renderJqueryUI;
-	}
-	
-	public static void setRenderJqueryUI(boolean renderJqueryUI)
-	{
-		BlueImpFileUploadPageConfigurator.renderJqueryUI = renderJqueryUI;
-	}
-	
 	@NotNull
 	@Override
 	public Page<?> configure(Page<?> page)
 	{
 		if (!page.isConfigured() && enabled())
 		{
-			page.getBody().add(new Paragraph<>("<script id=\"template-upload\" type=\"text/x-tmpl\">\n" +
+			page.getBody().add(new Paragraph<>("<!-- The template to display files available for upload -->\n" +
+			                                   "    <script id=\"template-upload\" type=\"text/x-tmpl\">\n" +
 			                                   "      {% for (var i=0, file; file=o.files[i]; i++) { %}\n" +
-			                                   "          <tr class=\"template-upload {%=o.options.loadImageFileTypes.test(file.type)?' image':''%}\">\n" +
+			                                   "          <tr class=\"template-upload fade {%=o.options.loadImageFileTypes.test(file.type)?' image':''%}\">\n" +
 			                                   "              <td>\n" +
 			                                   "                  <span class=\"preview\"></span>\n" +
 			                                   "              </td>\n" +
@@ -180,7 +171,7 @@ public class BlueImpFileUploadPageConfigurator
 			                                   "    <!-- The template to display files available for download -->\n" +
 			                                   "    <script id=\"template-download\" type=\"text/x-tmpl\">\n" +
 			                                   "      {% for (var i=0, file; file=o.files[i]; i++) { %}\n" +
-			                                   "          <tr class=\"template-download {%=file.thumbnailUrl?' image':''%}\">\n" +
+			                                   "          <tr class=\"template-download fade{%=file.thumbnailUrl?' image':''%}\">\n" +
 			                                   "              <td>\n" +
 			                                   "                  <span class=\"preview\">\n" +
 			                                   "                      {% if (file.thumbnailUrl) { %}\n" +

@@ -115,23 +115,26 @@ public class BlueImpFileUploadOptions<J extends BlueImpFileUploadOptions<J>>
 	private Boolean previewCanvas;
 	private String imagePreviewName;
 	private Boolean disableImagePreview;
-	@JsonSerialize(contentUsing = ToStringSerializer.class)
-	private Pattern loadAudioFileTypes;
+	@JsonRawValue
+	private String loadAudioFileTypes;
 	private Integer loadAudioMaxFileSize;
 	private String audioPreviewName;
 	private Boolean disableAudioPreview;
-	@JsonSerialize(contentUsing = ToStringSerializer.class)
-	private Pattern loadVideoFileTypes;
+	@JsonRawValue
+	private String loadVideoFileTypes;
 	private Integer loadVideoMaxFileSize;
 	private String videoPreviewName;
 	private Boolean disableVideoPreview;
-
-	@JsonSerialize(contentUsing = ToStringSerializer.class)
-	private Pattern acceptFileTypes;
+	@JsonRawValue
+	private String acceptFileTypes;
 	private Integer maxFileSize;
 	private Integer minFileSize;
 	private Integer maxNumberOfFiles;
 	private Boolean disableValidation;
+	
+	private String showElementClass;
+	private String uploadTemplateId;
+	private String downloadTemplateId;
 
 	/**
 	 * The options for the component
@@ -895,14 +898,14 @@ public class BlueImpFileUploadOptions<J extends BlueImpFileUploadOptions<J>>
 		return (J) this;
 	}
 
-	public Pattern getLoadAudioFileTypes()
+	public String getLoadAudioFileTypes()
 	{
 		return loadAudioFileTypes;
 	}
 
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J setLoadAudioFileTypes(Pattern loadAudioFileTypes)
+	public J setLoadAudioFileTypes(String loadAudioFileTypes)
 	{
 		this.loadAudioFileTypes = loadAudioFileTypes;
 		return (J) this;
@@ -947,14 +950,14 @@ public class BlueImpFileUploadOptions<J extends BlueImpFileUploadOptions<J>>
 		return (J) this;
 	}
 
-	public Pattern getLoadVideoFileTypes()
+	public String getLoadVideoFileTypes()
 	{
 		return loadVideoFileTypes;
 	}
 
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J setLoadVideoFileTypes(Pattern loadVideoFileTypes)
+	public J setLoadVideoFileTypes(String loadVideoFileTypes)
 	{
 		this.loadVideoFileTypes = loadVideoFileTypes;
 		return (J) this;
@@ -999,14 +1002,14 @@ public class BlueImpFileUploadOptions<J extends BlueImpFileUploadOptions<J>>
 		return (J) this;
 	}
 
-	public Pattern getAcceptFileTypes()
+	public String getAcceptFileTypes()
 	{
 		return acceptFileTypes;
 	}
 
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J setAcceptFileTypes(Pattern acceptFileTypes)
+	public J setAcceptFileTypes(String acceptFileTypes)
 	{
 		this.acceptFileTypes = acceptFileTypes;
 		return (J) this;
@@ -1062,5 +1065,38 @@ public class BlueImpFileUploadOptions<J extends BlueImpFileUploadOptions<J>>
 	{
 		this.disableValidation = disableValidation;
 		return (J) this;
+	}
+	
+	public String getShowElementClass()
+	{
+		return showElementClass;
+	}
+	
+	public BlueImpFileUploadOptions<J> setShowElementClass(String showElementClass)
+	{
+		this.showElementClass = showElementClass;
+		return this;
+	}
+	
+	public String getUploadTemplateId()
+	{
+		return uploadTemplateId;
+	}
+	
+	public BlueImpFileUploadOptions<J> setUploadTemplateId(String uploadTemplateId)
+	{
+		this.uploadTemplateId = uploadTemplateId;
+		return this;
+	}
+	
+	public String getDownloadTemplateId()
+	{
+		return downloadTemplateId;
+	}
+	
+	public BlueImpFileUploadOptions<J> setDownloadTemplateId(String downloadTemplateId)
+	{
+		this.downloadTemplateId = downloadTemplateId;
+		return this;
 	}
 }

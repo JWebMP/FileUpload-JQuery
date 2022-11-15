@@ -27,55 +27,23 @@ import com.jwebmp.core.base.servlets.interfaces.ReferencePool;
  * @author GedMarc
  * @since 20 Apr 2016
  */
-@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-tmpl/js/tmpl.js",sortOrder = 800)
+@NgScript(value = "app/blueimp/tmpl.min.js",sortOrder = 80)
+
+@NgScript(value = "app/blueimp/load-image.all.min.js",sortOrder = 86)
+@NgScript(value = "app/blueimp/canvas-to-blob.min.js",sortOrder = 87)
+
+@NgScript(value = "app/blueimp/jquery.iframe-transport.js",sortOrder = 830)
 
 
-@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-load-image/js/vendor/jquery.Jcrop.js",sortOrder = 805)
-@NgStyleSheet("app/blueimp/blueimpfileupload/blueimp-load-image/css/vendor/jquery.Jcrop.css")
+@NgScript(value = "app/blueimp/jquery.fileupload.js",sortOrder = 835)
+@NgStyleSheet("app/blueimp/jquery.fileupload.css")
+@NgStyleSheet("app/blueimp/jquery.fileupload-ui.css")
 
-
-@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-load-image/js/load-image.all.min.js",sortOrder = 810)
-
-/*
-
-@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-load-image/js/load-image-exif.js",sortOrder = 815)
-
-
-@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-load-image/js/load-image-meta.js",sortOrder = 815)
-
-
-@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-load-image/js/load-image-exif-map.js",sortOrder = 820)
-
-
-@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-load-image/js/load-image.js",sortOrder = 825)
-*/
-
-@NgScript(value = "app/blueimp/blueimpfileupload/blueimp-canvas-to-blob/js/canvas-to-blob.js",sortOrder = 830)
-
-@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.fileupload.js",sortOrder = 835)
-@NgStyleSheet("app/blueimp/blueimpfileupload/blueimpfileupload/css/jquery.fileupload.css")
-
-
-//@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.fileupload-audio.js",sortOrder = 840)
-
-/*
-
-@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.fileupload-image.js",sortOrder = 845)
-
-
-@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.fileupload-process.js",sortOrder = 850)
-
-
-@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.fileupload-validate.js",sortOrder = 855)
-*/
-
-
-@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.iframe-transport.js",sortOrder = 860)
-
-/*@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.fileupload-video.js",sortOrder = 865)*/
-
-//@NgScript(value = "app/blueimp/blueimpfileupload/blueimpfileupload/js/jquery.fileupload-ui.js",sortOrder = 870)
-
+@NgScript(value = "app/blueimp/jquery.fileupload-process.js",sortOrder = 836)
+@NgScript(value = "app/blueimp/jquery.fileupload-image.js",sortOrder = 837)
+//@NgScript(value = "app/blueimp/jquery.fileupload-audio.js",sortOrder = 838)
+@NgScript(value = "app/blueimp/jquery.fileupload-validate.js",sortOrder = 839)
+@NgScript(value = "app/blueimp/jquery.fileupload-ui.js",sortOrder = 840)
 
 
 public enum BlueImpFileUploadReferencePool

@@ -49,7 +49,7 @@ public class FileUploadTestBody
 		          .setMaxFileSize(99999999)
 		          .setMaxChunkSize(204800)
 		          .setDisableImageResize("/Android(?!.*Chrome)|Opera/" + ".test(window.navigator.userAgent)")
-		.setAcceptFileTypes(Pattern.compile("/(\\.|\\/)(gif|jpe?g|png)$/i"));
+		.setAcceptFileTypes("/(\\.|\\/)(gif|jpe?g|png)$/i");
 		
 		
 		DivSimple<?> d = new DivSimple<>();
