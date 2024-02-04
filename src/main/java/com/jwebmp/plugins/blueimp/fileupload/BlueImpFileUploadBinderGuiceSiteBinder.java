@@ -1,26 +1,26 @@
 package com.jwebmp.plugins.blueimp.fileupload;
 
-import com.guicedee.guicedservlets.services.GuiceSiteInjectorModule;
-import com.guicedee.guicedservlets.services.IGuiceSiteBinder;
-import com.guicedee.logger.LogFactory;
+import com.google.inject.servlet.ServletModule;
+import com.guicedee.guicedinjection.interfaces.IGuiceModule;
 import com.jwebmp.plugins.blueimp.fileupload.servlets.AngularFileServlet;
+import lombok.extern.java.Log;
 
 import java.util.logging.Level;
 
-import static com.jwebmp.core.utilities.StaticStrings.*;
+import static com.jwebmp.core.utilities.StaticStrings.QUERY_PARAMETERS_REGEX;
 
+@Log
 public class BlueImpFileUploadBinderGuiceSiteBinder
-		implements IGuiceSiteBinder<GuiceSiteInjectorModule>
+				extends ServletModule
+				implements IGuiceModule<BlueImpFileUploadBinderGuiceSiteBinder>
 {
 	public static final String BLUEIMP_FILEUPLOAD_SERVLETURL = "blueimpangularfileupload";
-	private static final java.util.logging.Logger log = LogFactory.getLog("BlueImpFileUploadBinderGuiceSiteBinder");
-
+	
 	@Override
-	public void onBind(GuiceSiteInjectorModule module)
+	public void configureServlets()
 	{
-		module.serveRegex$("(" + "/" + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + ")" + QUERY_PARAMETERS_REGEX)
-		      .with(AngularFileServlet.class);
-
+		serveRegex("(" + "/" + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + ")" + QUERY_PARAMETERS_REGEX)
+						.with(AngularFileServlet.class);
 		BlueImpFileUploadBinderGuiceSiteBinder.log.log(Level.INFO, "Serving File Uploads at {0}", "/" + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL);
 	}
 }

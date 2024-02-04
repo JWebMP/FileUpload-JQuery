@@ -19,7 +19,7 @@ package com.jwebmp.plugins.blueimp.fileupload;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
 import com.jwebmp.core.utilities.StaticStrings;
 
-import static com.guicedee.guicedinjection.json.StaticStrings.*;
+import static com.guicedee.services.jsonrepresentation.json.StaticStrings.*;
 import static com.jwebmp.core.utilities.StaticStrings.*;
 
 /**

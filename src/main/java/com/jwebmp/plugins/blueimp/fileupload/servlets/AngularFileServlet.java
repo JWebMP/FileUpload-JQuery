@@ -19,17 +19,15 @@ package com.jwebmp.plugins.blueimp.fileupload.servlets;
 
 import com.google.common.base.Strings;
 import com.google.inject.Singleton;
-import com.guicedee.guicedinjection.interfaces.IDefaultService;
-import com.guicedee.guicedinjection.json.StaticStrings;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.pairing.Pair;
+import com.guicedee.guicedservlets.GuicedServletKeys;
+import com.guicedee.services.jsonrepresentation.json.StaticStrings;
 import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.servlets.JWDefaultServlet;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.guicedinjection.pairing.Pair;
-import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.DataCallIntercepter;
-import com.guicedee.logger.LogFactory;
 import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadBinderGuiceSiteBinder;
 import com.jwebmp.plugins.blueimp.fileupload.intercepters.OnDeleteFileInterceptor;
 import com.jwebmp.plugins.blueimp.fileupload.intercepters.OnFileUploadInterceptor;
@@ -37,16 +35,16 @@ import com.jwebmp.plugins.blueimp.fileupload.intercepters.OnGetFileInterceptor;
 import com.jwebmp.plugins.blueimp.fileupload.intercepters.OnThumbnailFileInterceptor;
 import com.jwebmp.plugins.blueimp.fileupload.parts.json.JsonFile;
 import com.jwebmp.plugins.blueimp.fileupload.parts.json.JsonFilesArray;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.java.Log;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,10 +53,8 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import static com.jwebmp.core.utilities.StaticStrings.*;
-import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
+import static com.jwebmp.interception.JWebMPInterceptionBinder.DataCallInterceptorKey;
 
 /**
  * The default file receiving servlet
@@ -66,12 +62,10 @@ import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 @SuppressWarnings({"unchecked", "rawtypes"})
 @Singleton
 @MultipartConfig
+@Log
 public class AngularFileServlet
 		extends JWDefaultServlet
 {
-	private static final Logger log = LogFactory.getInstance()
-	                                            .getLogger("BlueImpAngularFileServlet");
-	
 	private static final String getFileMethod = "getfile";
 	private static final String deleteFileMethod = "delfile";
 	private static final String getThumbMethod = "getthumb";
@@ -191,7 +185,7 @@ public class AngularFileServlet
 	private void processGetFile(HttpServletRequest request, HttpServletResponse response)
 	{
 		String filename = request.getParameter(AngularFileServlet.getFileMethod);
-		Set<OnGetFileInterceptor> intercepters = IDefaultService.loaderToSet(ServiceLoader.load(OnGetFileInterceptor.class));
+		Set<OnGetFileInterceptor> intercepters = GuiceContext.instance().loaderToSet(ServiceLoader.load(OnGetFileInterceptor.class));
 		if (intercepters.isEmpty())
 		{
 			AngularFileServlet.log.warning(
@@ -232,7 +226,7 @@ public class AngularFileServlet
 	{
 		String filename = request.getParameter(AngularFileServlet.deleteFileMethod);
 		
-		Set<OnDeleteFileInterceptor> intercepters = IDefaultService.loaderToSet(ServiceLoader.load(OnDeleteFileInterceptor.class));
+		Set<OnDeleteFileInterceptor> intercepters = GuiceContext.instance().loaderToSet(ServiceLoader.load(OnDeleteFileInterceptor.class));
 		if (intercepters.isEmpty())
 		{
 			AngularFileServlet.log.warning(
@@ -258,7 +252,7 @@ public class AngularFileServlet
 	{
 		String filename = request.getParameter(AngularFileServlet.getThumbMethod);
 		
-		Set<OnThumbnailFileInterceptor> intercepters = IDefaultService.loaderToSet(ServiceLoader.load(OnThumbnailFileInterceptor.class));
+		Set<OnThumbnailFileInterceptor> intercepters = GuiceContext.instance().loaderToSet(ServiceLoader.load(OnThumbnailFileInterceptor.class));
 		if (intercepters.isEmpty())
 		{
 			AngularFileServlet.log.warning(
@@ -329,7 +323,7 @@ public class AngularFileServlet
 			filesArray.getAllFiles()
 			          .add(file);
 			
-			Set<OnFileUploadInterceptor> intercepters = IDefaultService.loaderToSet(ServiceLoader.load(OnFileUploadInterceptor.class));
+			Set<OnFileUploadInterceptor> intercepters = GuiceContext.instance().loaderToSet(ServiceLoader.load(OnFileUploadInterceptor.class));
 			
 			if (intercepters.isEmpty())
 			{
