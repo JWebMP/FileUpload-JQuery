@@ -3,14 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.jwebmp</groupId>
-        <artifactId>jwebmp-builder</artifactId>
+        <artifactId>parent</artifactId>
         <version>2.0.0-SNAPSHOT</version>
-        <relativePath>../../../../</relativePath>
     </parent>
 
-
-    <groupId>com.jwebmp.plugins.blueimp</groupId>
-    <artifactId>jwebmp-blueimp-fileupload</artifactId>
+    <groupId>com.jwebmp.plugins</groupId>
+    <artifactId>fileupload-jquery</artifactId>
     <packaging>jar</packaging>
     <version>2.0.0-SNAPSHOT</version>
     <name>BlueImp File Upload</name>
@@ -20,17 +18,11 @@
         Works with any server-side platform (Google App Engine, PHP, Python, Ruby on Rails, Java, etc.) that supports
         standard HTML form file uploads.
     </description>
-    <url>https://github.com/GedMarc/JWebMP-BlueImpFileUpload</url>
-
-    <issueManagement>
-        <system>Github</system>
-        <url>https://github.com/GedMarc/JWebMP-BlueImpFileUpload/issues</url>
-    </issueManagement>
 
     <dependencies>
         <dependency>
-            <groupId>com.jwebmp.plugins.blueimp</groupId>
-            <artifactId>jwebmp-blueimp-gallery</artifactId>
+            <groupId>com.jwebmp.plugins</groupId>
+            <artifactId>gallery</artifactId>
         </dependency>
 
         <dependency>
@@ -39,24 +31,15 @@
         </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.plugins.jquery</groupId>
-            <artifactId>jwebmp-jquery-ui</artifactId>
+            <groupId>com.jwebmp.plugins</groupId>
+            <artifactId>jquery-ui</artifactId>
         </dependency>
 
     </dependencies>
 
-    <scm>
-        <url>https://github.com/GedMarc?tab=repositories</url>
-    </scm>
-
-    <ciManagement>
-        <system>TeamCity</system>
-        <url>http://jwebmp.com/teamcity</url>
-    </ciManagement>
-
     <properties>
         <ignore.moditect>true</ignore.moditect>
-        <flatten.pom>false</flatten.pom>
+        <project.scm.nameUrl>/JWebMP/Plugins/FileUpload-JQuery</project.scm.nameUrl>
     </properties>
 
     <dependencyManagement>
@@ -68,6 +51,15 @@
                 <scope>import</scope>
                 <version>${guicedee.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.guicedee</groupId>
+                <artifactId>apache-bom</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${guicedee.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>com.jwebmp</groupId>
