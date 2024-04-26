@@ -17,14 +17,17 @@
 
 package com.jwebmp.plugins.blueimp.fileupload;
 
-import com.google.inject.*;
-import com.jwebmp.core.*;
-import com.jwebmp.core.base.html.*;
-import com.jwebmp.core.plugins.*;
-import com.jwebmp.core.services.*;
-import com.jwebmp.plugins.blueimp.fileupload.options.*;
-import com.jwebmp.plugins.blueimp.gallery.*;
-import jakarta.validation.constraints.*;
+import com.google.inject.Singleton;
+import com.jwebmp.core.base.angular.client.annotations.angularconfig.NgScript;
+import com.jwebmp.core.base.angular.client.annotations.typescript.TsDependency;
+import com.jwebmp.core.base.html.Paragraph;
+import com.jwebmp.core.plugins.PluginInformation;
+import com.jwebmp.core.plugins.PluginStatus;
+import com.jwebmp.core.services.IPage;
+import com.jwebmp.core.services.IPageConfigurator;
+import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadDefaultOptions;
+import com.jwebmp.plugins.blueimp.gallery.BlueImpGallery;
+import jakarta.validation.constraints.NotNull;
 
 @PluginInformation(pluginName = "BlueImp File Upload",
         pluginUniqueName = "blueimp-file-upload",
@@ -53,6 +56,8 @@ import jakarta.validation.constraints.*;
 
 )
 @Singleton
+@TsDependency(value = "blueimp-file-upload", version = "*")
+@NgScript(value = "node_modules/blueimp-file-upload/js/jquery.fileupload.js")
 public class BlueImpFileUploadPageConfigurator
         implements IPageConfigurator<BlueImpFileUploadPageConfigurator>
 {

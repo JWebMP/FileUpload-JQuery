@@ -16,17 +16,13 @@
  */
 package com.jwebmp.plugins.blueimp.fileupload;
 
-import com.jwebmp.core.base.angular.client.annotations.angularconfig.*;
-import com.jwebmp.core.base.references.CSSReference;
-import com.jwebmp.core.base.references.JavascriptReference;
-import com.jwebmp.core.base.servlets.interfaces.ReferencePool;
-
 /**
  * Default reference pool structure
  *
  * @author GedMarc
  * @since 20 Apr 2016
  */
+/*
 @NgScript(value = "app/blueimp/tmpl.min.js",sortOrder = 80)
 
 @NgScript(value = "app/blueimp/load-image.all.min.js",sortOrder = 86)
@@ -44,6 +40,7 @@ import com.jwebmp.core.base.servlets.interfaces.ReferencePool;
 //@NgScript(value = "app/blueimp/jquery.fileupload-audio.js",sortOrder = 838)
 @NgScript(value = "app/blueimp/jquery.fileupload-validate.js",sortOrder = 839)
 @NgScript(value = "app/blueimp/jquery.fileupload-ui.js",sortOrder = 840)
+*/
 
 
 public enum BlueImpFileUploadReferencePool
