@@ -17,237 +17,239 @@
 
 package com.jwebmp.plugins.blueimp.fileupload.parts;
 
-import com.jwebmp.core.base.ComponentHierarchyBase;
-import com.jwebmp.core.base.html.*;
+import com.jwebmp.core.base.html.Button;
+import com.jwebmp.core.base.html.DivSimple;
+import com.jwebmp.core.base.html.Italic;
+import com.jwebmp.core.base.html.Span;
 import com.jwebmp.core.base.html.inputs.InputCheckBoxType;
 import com.jwebmp.core.base.html.inputs.InputFileType;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
-
 import jakarta.validation.constraints.NotNull;
 
 import static com.guicedee.services.jsonrepresentation.json.StaticStrings.STRING_EMPTY;
-import static com.jwebmp.core.utilities.StaticStrings.*;
+import static com.jwebmp.interception.services.StaticStrings.HTML_TAB;
+
 
 public class BlueImpUploadButtonBar<J extends BlueImpUploadButtonBar<J>>
-		extends DivSimple<J>
+        extends DivSimple<J>
 {
 
-	private DivSimple<?> buttonBarContainerDiv;
-	private InputFileType<?> fileInput = new InputFileType<>();
+    private DivSimple<?> buttonBarContainerDiv;
+    private InputFileType<?> fileInput = new InputFileType<>();
 
-	public BlueImpUploadButtonBar()
-	{
-		addClass("row fileupload-buttonbar");
-		buttonBarContainerDiv = new DivSimple<>().addClass("col_lg_7");
-		add(buttonBarContainerDiv);
-	}
+    public BlueImpUploadButtonBar()
+    {
+        addClass("row fileupload-buttonbar");
+        buttonBarContainerDiv = new DivSimple<>().addClass("col_lg_7");
+        add(buttonBarContainerDiv);
+    }
 
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J addAddButton(String displayClass, String iconClass, String label, boolean multiple)
-	{
-		Span<IComponentHierarchyBase, ?, ?> span = new Span();
+    @SuppressWarnings("unchecked")
+    @NotNull
+    public J addAddButton(String displayClass, String iconClass, String label, boolean multiple)
+    {
+        Span<IComponentHierarchyBase, ?, ?> span = new Span();
 
-		if (displayClass != null && !displayClass.isEmpty())
-		{
-			span.addClass(displayClass);
-		}
+        if (displayClass != null && !displayClass.isEmpty())
+        {
+            span.addClass(displayClass);
+        }
 
-		span.addClass("fileinput-button");
-		//span.addAttribute("ng-class", "{disabled: disabled}");
+        span.addClass("fileinput-button");
+        //span.addAttribute("ng-class", "{disabled: disabled}");
 
-		if (iconClass != null && !iconClass.isEmpty())
-		{
-			Italic i = new Italic();
-			i.addClass(iconClass);
-			i.addClass("ml-1");
-			span.add(i);
-		}
+        if (iconClass != null && !iconClass.isEmpty())
+        {
+            Italic i = new Italic();
+            i.addClass(iconClass);
+            i.addClass("ml-1");
+            span.add(i);
+        }
 
-		if (label != null && !label.isEmpty())
-		{
-			Span labelSpan = new Span();
-			labelSpan.setText(label);
-			span.add(labelSpan);
-		}
-		
-		fileInput.setName("files[]");
-	//	fileInput.addAttribute("ng-disabled", "disabled");
+        if (label != null && !label.isEmpty())
+        {
+            Span labelSpan = new Span();
+            labelSpan.setText(label);
+            span.add(labelSpan);
+        }
 
-		if (multiple)
-		{
-			addAttribute("multiple", STRING_EMPTY);
-		}
-		span.add(fileInput);
-		span.addClass("mr-1");
-		buttonBarContainerDiv.add(span);
-		return (J) this;
-	}
+        fileInput.setName("files[]");
+        //	fileInput.addAttribute("ng-disabled", "disabled");
 
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J addStartButton(String displayClass, String iconClass, String label)
-	{
-		Button b = new Button<>();
-		if (displayClass != null && !displayClass.isEmpty())
-		{
-			b.addClass(displayClass);
-		}
-		b.addClass("start");
-		b.addClass("mr-1");
-	//	b.addAttribute("data-ng-click", "submit()");
+        if (multiple)
+        {
+            addAttribute("multiple", STRING_EMPTY);
+        }
+        span.add(fileInput);
+        span.addClass("mr-1");
+        buttonBarContainerDiv.add(span);
+        return (J) this;
+    }
 
-		if (iconClass != null && !iconClass.isEmpty())
-		{
-			Italic i = new Italic();
-			i.addClass(iconClass);
-			i.addClass("mr-1");
-			b.add(i);
-		}
-		if (label != null && !label.isEmpty())
-		{
-			Span span = new Span();
-			span.setText(label);
-			b.add(span);
-		}
-		buttonBarContainerDiv.add(b);
+    @SuppressWarnings("unchecked")
+    @NotNull
+    public J addStartButton(String displayClass, String iconClass, String label)
+    {
+        Button b = new Button<>();
+        if (displayClass != null && !displayClass.isEmpty())
+        {
+            b.addClass(displayClass);
+        }
+        b.addClass("start");
+        b.addClass("mr-1");
+        //	b.addAttribute("data-ng-click", "submit()");
 
-		return (J) this;
-	}
+        if (iconClass != null && !iconClass.isEmpty())
+        {
+            Italic i = new Italic();
+            i.addClass(iconClass);
+            i.addClass("mr-1");
+            b.add(i);
+        }
+        if (label != null && !label.isEmpty())
+        {
+            Span span = new Span();
+            span.setText(label);
+            b.add(span);
+        }
+        buttonBarContainerDiv.add(b);
 
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J addCancelButton(String displayClass, String iconClass, String label)
-	{
-		Button b = new Button<>();
-		if (displayClass != null && !displayClass.isEmpty())
-		{
-			b.addClass(displayClass);
-		}
-		b.addClass("cancel");
-		b.addClass("mr-1");
-	//	b.addAttribute("data-ng-click", "cancel()");
+        return (J) this;
+    }
 
-		if (iconClass != null && !iconClass.isEmpty())
-		{
-			Italic i = new Italic();
-			i.addClass(iconClass);
-			i.addClass("mr-1");
-			b.add(i);
-		}
-		if (label != null && !label.isEmpty())
-		{
-			Span span = new Span();
-			span.setText(label);
-			b.add(span);
-		}
-		buttonBarContainerDiv.add(b);
+    @SuppressWarnings("unchecked")
+    @NotNull
+    public J addCancelButton(String displayClass, String iconClass, String label)
+    {
+        Button b = new Button<>();
+        if (displayClass != null && !displayClass.isEmpty())
+        {
+            b.addClass(displayClass);
+        }
+        b.addClass("cancel");
+        b.addClass("mr-1");
+        //	b.addAttribute("data-ng-click", "cancel()");
 
-		return (J) this;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J addDeleteSelected(String displayClass, String iconClass, String label)
-	{
-		Button b = new Button<>();
-		if (displayClass != null && !displayClass.isEmpty())
-		{
-			b.addClass(displayClass);
-		}
-		b.addClass("delete");
-		b.addClass("mr-1");
-		
-	//	b.addAttribute("data-ng-click", "delete()");
-		
-		if (iconClass != null && !iconClass.isEmpty())
-		{
-			Italic i = new Italic();
-			i.addClass(iconClass);
-			i.addClass("mr-1");
-			b.add(i);
-		}
-		if (label != null && !label.isEmpty())
-		{
-			Span span = new Span();
-			span.setText(label);
-			b.add(span);
-		}
-		buttonBarContainerDiv.add(b);
-		
-		return (J) this;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J addDeleteCheckbox(String displayClass, String iconClass, String label)
-	{
-		InputCheckBoxType<?> b = new InputCheckBoxType<>();
-		if (displayClass != null && !displayClass.isEmpty())
-		{
-			b.addClass(displayClass);
-		}
-		b.addClass("toggle");
-		buttonBarContainerDiv.add(b);
-		return (J) this;
-	}
+        if (iconClass != null && !iconClass.isEmpty())
+        {
+            Italic i = new Italic();
+            i.addClass(iconClass);
+            i.addClass("mr-1");
+            b.add(i);
+        }
+        if (label != null && !label.isEmpty())
+        {
+            Span span = new Span();
+            span.setText(label);
+            b.add(span);
+        }
+        buttonBarContainerDiv.add(b);
 
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J addGlobalFileProcessingState()
-	{
-		Span sp = new Span();
-		sp.addClass("fileupload-process");
-		buttonBarContainerDiv.add(sp);
-		return (J) this;
-	}
+        return (J) this;
+    }
 
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J addGlobalProgressState()
-	{
-		DivSimple<?> globalProcessState = new DivSimple<>().addClass("col-lg-5")
-				.addClass("fileupload-progress")
-				.addClass("fade");
-		DivSimple<?> progressSection = new DivSimple<>();
-		progressSection.addClass("progress")
-		           .addClass("progress-striped")
-		           .addClass("active")
-		           .addAttribute("role", "progressbar")
-		           .addAttribute("aria-valuemin", "0")
-		           .addAttribute("aria-valuemax", "100");
-		DivSimple<?> progressBar = new DivSimple<>();
-		progressBar.addClass("progress-bar")
-		           .addClass("progress-bar-success")
-		           .addStyle("width", "0%");
-		
-		progressSection.add(progressBar);
-		globalProcessState.add(progressSection);
-		
-		DivSimple<?> progressExtended = new DivSimple<>();
-		progressExtended.addClass("progress-extended")
-		                .setText(HTML_TAB);
-		
-		globalProcessState.add(progressExtended);
-		
-		add(globalProcessState);
-		return (J) this;
-	}
+    @SuppressWarnings("unchecked")
+    @NotNull
+    public J addDeleteSelected(String displayClass, String iconClass, String label)
+    {
+        Button b = new Button<>();
+        if (displayClass != null && !displayClass.isEmpty())
+        {
+            b.addClass(displayClass);
+        }
+        b.addClass("delete");
+        b.addClass("mr-1");
 
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
+        //	b.addAttribute("data-ng-click", "delete()");
 
-	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-	
-	public InputFileType<?> getFileInput()
-	{
-		return fileInput;
-	}
+        if (iconClass != null && !iconClass.isEmpty())
+        {
+            Italic i = new Italic();
+            i.addClass(iconClass);
+            i.addClass("mr-1");
+            b.add(i);
+        }
+        if (label != null && !label.isEmpty())
+        {
+            Span span = new Span();
+            span.setText(label);
+            b.add(span);
+        }
+        buttonBarContainerDiv.add(b);
+
+        return (J) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    @NotNull
+    public J addDeleteCheckbox(String displayClass, String iconClass, String label)
+    {
+        InputCheckBoxType<?> b = new InputCheckBoxType<>();
+        if (displayClass != null && !displayClass.isEmpty())
+        {
+            b.addClass(displayClass);
+        }
+        b.addClass("toggle");
+        buttonBarContainerDiv.add(b);
+        return (J) this;
+    }
+
+    @NotNull
+    @SuppressWarnings("unchecked")
+    public J addGlobalFileProcessingState()
+    {
+        Span sp = new Span();
+        sp.addClass("fileupload-process");
+        buttonBarContainerDiv.add(sp);
+        return (J) this;
+    }
+
+    @NotNull
+    @SuppressWarnings("unchecked")
+    public J addGlobalProgressState()
+    {
+        DivSimple<?> globalProcessState = new DivSimple<>().addClass("col-lg-5")
+                                                           .addClass("fileupload-progress")
+                                                           .addClass("fade");
+        DivSimple<?> progressSection = new DivSimple<>();
+        progressSection.addClass("progress")
+                       .addClass("progress-striped")
+                       .addClass("active")
+                       .addAttribute("role", "progressbar")
+                       .addAttribute("aria-valuemin", "0")
+                       .addAttribute("aria-valuemax", "100");
+        DivSimple<?> progressBar = new DivSimple<>();
+        progressBar.addClass("progress-bar")
+                   .addClass("progress-bar-success")
+                   .addStyle("width", "0%");
+
+        progressSection.add(progressBar);
+        globalProcessState.add(progressSection);
+
+        DivSimple<?> progressExtended = new DivSimple<>();
+        progressExtended.addClass("progress-extended")
+                        .setText(HTML_TAB);
+
+        globalProcessState.add(progressExtended);
+
+        add(globalProcessState);
+        return (J) this;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        return super.equals(o);
+    }
+
+    public InputFileType<?> getFileInput()
+    {
+        return fileInput;
+    }
 }

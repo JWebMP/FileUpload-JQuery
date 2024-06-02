@@ -27,6 +27,16 @@
 
         <dependency>
             <groupId>com.guicedee.services</groupId>
+            <artifactId>vertx-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.guicedee.servlets</groupId>
+            <artifactId>guiced-vertx</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.guicedee.services</groupId>
             <artifactId>commons-fileupload</artifactId>
         </dependency>
 

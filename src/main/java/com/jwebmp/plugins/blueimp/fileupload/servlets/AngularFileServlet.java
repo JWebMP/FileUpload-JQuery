@@ -21,12 +21,10 @@ import com.google.common.base.Strings;
 import com.google.inject.Singleton;
 import com.guicedee.client.IGuiceContext;
 import com.guicedee.guicedinjection.pairing.Pair;
-import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.guicedee.services.jsonrepresentation.json.StaticStrings;
-import com.jwebmp.core.SessionHelper;
+import com.guicedee.vertx.spi.VertxRouterConfigurator;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.servlets.JWDefaultServlet;
 import com.jwebmp.interception.services.DataCallIntercepter;
 import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadBinderGuiceSiteBinder;
 import com.jwebmp.plugins.blueimp.fileupload.intercepters.OnDeleteFileInterceptor;
@@ -35,6 +33,7 @@ import com.jwebmp.plugins.blueimp.fileupload.intercepters.OnGetFileInterceptor;
 import com.jwebmp.plugins.blueimp.fileupload.intercepters.OnThumbnailFileInterceptor;
 import com.jwebmp.plugins.blueimp.fileupload.parts.json.JsonFile;
 import com.jwebmp.plugins.blueimp.fileupload.parts.json.JsonFilesArray;
+import io.vertx.ext.web.Router;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -54,17 +53,18 @@ import java.nio.charset.Charset;
 import java.util.*;
 import java.util.logging.Level;
 
-import static com.jwebmp.interception.JWebMPInterceptionBinder.DataCallInterceptorKey;
+import static com.jwebmp.interception.services.JWebMPInterceptionBinder.DataCallInterceptorKey;
 
 /**
  * The default file receiving servlet
  */
-@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressWarnings({"unchecked",
+        "rawtypes"})
 @Singleton
 @MultipartConfig
 @Log
 public class AngularFileServlet
-        extends JWDefaultServlet
+        implements VertxRouterConfigurator
 {
     private static final String getFileMethod = "getfile";
     private static final String deleteFileMethod = "delfile";
@@ -297,7 +297,8 @@ public class AngularFileServlet
         }
     }
 
-    private synchronized void processUploadedFile(boolean completed, Long totalS, FileItem item, JsonFilesArray filesArray, String namedCollector) throws IOException
+    private synchronized void processUploadedFile(boolean completed, Long totalS, FileItem item, JsonFilesArray filesArray, String namedCollector) throws
+                                                                                                                                                   IOException
     {
         String fileUploadIdentifier = item.getName() + "|" + totalS + "|" + item.getFieldName();
         if (!AngularFileServlet.stringFileMap.containsKey(fileUploadIdentifier))
@@ -358,5 +359,12 @@ public class AngularFileServlet
             }
             AngularFileServlet.stringFileMap.remove(fileUploadIdentifier);
         }
+    }
+
+    @Override
+    public Router builder(Router builder)
+    {
+        builder.route("")
+        return builder;
     }
 }
