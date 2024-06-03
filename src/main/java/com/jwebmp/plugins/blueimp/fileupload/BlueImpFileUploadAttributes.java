@@ -17,49 +17,47 @@
 package com.jwebmp.plugins.blueimp.fileupload;
 
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
-import com.jwebmp.core.utilities.StaticStrings;
 
 import static com.guicedee.services.jsonrepresentation.json.StaticStrings.*;
-import static com.jwebmp.core.utilities.StaticStrings.*;
 
 /**
  * @author GedMarc
  */
 public enum BlueImpFileUploadAttributes
-		implements AttributeDefinitions
+        implements AttributeDefinitions
 {
-	Visibility;
+    Visibility;
 
-	private boolean isKeyword;
+    private boolean isKeyword;
 
-	/**
-	 * The component attributes
-	 */
-	BlueImpFileUploadAttributes()
-	{
-	}
+    /**
+     * The component attributes
+     */
+    BlueImpFileUploadAttributes()
+    {
+    }
 
-	/**
-	 * If the attribute is a keyword
-	 *
-	 * @return
-	 */
-	@Override
-	public boolean isKeyword()
-	{
-		return isKeyword;
-	}
+    /**
+     * If the attribute is a keyword
+     *
+     * @return
+     */
+    @Override
+    public boolean isKeyword()
+    {
+        return isKeyword;
+    }
 
-	/**
-	 * Returns the attribute name replacing all underscores with dashes and all dollar signs to empty
-	 *
-	 * @return
-	 */
-	@Override
-	public String toString()
-	{
-		return name().toLowerCase()
-		             .replace(CHAR_UNDERSCORE, CHAR_DASH)
-		             .replace(STRING_DOLLAR, STRING_EMPTY);
-	}
+    /**
+     * Returns the attribute name replacing all underscores with dashes and all dollar signs to empty
+     *
+     * @return
+     */
+    @Override
+    public String toString()
+    {
+        return name().toLowerCase()
+                     .replace(CHAR_UNDERSCORE, CHAR_DASH)
+                     .replace(STRING_DOLLAR, STRING_EMPTY);
+    }
 }

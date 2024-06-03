@@ -1,11 +1,10 @@
 package com.jwebmp.plugins.blueimp.fileupload.parts;
 
-import com.jwebmp.core.Feature;
-import com.jwebmp.core.base.angular.client.annotations.structures.*;
-import com.jwebmp.core.base.angular.client.services.interfaces.*;
-import com.jwebmp.core.base.html.*;
+import com.jwebmp.core.base.angular.client.annotations.structures.NgField;
+import com.jwebmp.core.base.angular.client.services.interfaces.INgComponent;
+import com.jwebmp.core.base.html.Form;
+import com.jwebmp.core.base.html.TableBodyGroup;
 import com.jwebmp.core.base.html.interfaces.children.FormChildren;
-import com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadBinderGuiceSiteBinder;
 import com.jwebmp.plugins.blueimp.fileupload.options.BlueImpFileUploadOptions;
 
 import java.util.List;
@@ -18,75 +17,75 @@ import java.util.List;
 
 @NgField("files : any = [];")
 public class BlueImpUploadForm<J extends BlueImpUploadForm<J>>
-		extends Form<J> implements FormChildren, INgComponent<J>
+        extends Form<J> implements FormChildren, INgComponent<J>
 {
-	private final String collectorName;
-	private boolean uploadTemplate = true;
-	private boolean downloadTemplate = true;
-	private BlueImpFileUploadOptions<?> options = new BlueImpFileUploadOptions<>();
-	
-	public BlueImpUploadForm()
-	{
-		this("");
-	}
-	
-	public BlueImpUploadForm(String collectorName)
-	{
-		this.collectorName = collectorName;
-		addAttribute("action", "/" + BlueImpFileUploadBinderGuiceSiteBinder.BLUEIMP_FILEUPLOAD_SERVLETURL + "?uploadCollectorName=" + collectorName);
-		addAttribute("method", "POST");
-		addAttribute("enctype", "multipart/form-data");
-	}
-	
-	@Override
-	public List<String> globalFields()
-	{
-		List<String> out = INgComponent.super.globalFields();
-		out.add("declare var $:any;");
-		return out;
-	}
-	
-	@Override
-	public List<String> onInit()
-	{
-		List<String> out = INgComponent.super.onInit();
-		String requiredString = getJQueryID() + "fileupload(";
-		requiredString += getOptions().toString();
-		requiredString += ");" + getNewLine();
-		out.add(requiredString);
-		return out;
-	}
-	
-	public BlueImpUploadButtonBar<?> addButtonBar()
-	{
-		BlueImpUploadButtonBar<?> bar = new BlueImpUploadButtonBar<>();
-		add(bar);
-		return bar;
-	}
-	
-	public BlueImpFileUploadTable<?> addDisplayTable()
-	{
-		BlueImpFileUploadTable<?> bar = new BlueImpFileUploadTable<>();
-		bar.addClass("table table-striped");
-		bar.addAttribute("role", "presentation");
-		bar.add(new TableBodyGroup<>().addClass("files"));
-		add(bar);
-		return bar;
-	}
-	
-	@Override
-	public BlueImpFileUploadOptions<?> getOptions()
-	{
-		if (options == null)
-		{
-			options = new BlueImpFileUploadOptions<>();
-		}
-		return options;
-	}
-	
-	@Override
-	public void init()
-	{ /*if(uploadTemplate)
+    private final String collectorName;
+    private boolean uploadTemplate = true;
+    private boolean downloadTemplate = true;
+    private BlueImpFileUploadOptions<?> options = new BlueImpFileUploadOptions<>();
+
+    public BlueImpUploadForm()
+    {
+        this("");
+    }
+
+    public BlueImpUploadForm(String collectorName)
+    {
+        this.collectorName = collectorName;
+        addAttribute("action", "/" + "blueimpangularfileupload" + "?uploadCollectorName=" + collectorName);
+        addAttribute("method", "POST");
+        addAttribute("enctype", "multipart/form-data");
+    }
+
+    @Override
+    public List<String> globalFields()
+    {
+        List<String> out = INgComponent.super.globalFields();
+        out.add("declare var $:any;");
+        return out;
+    }
+
+    @Override
+    public List<String> onInit()
+    {
+        List<String> out = INgComponent.super.onInit();
+        String requiredString = getJQueryID() + "fileupload(";
+        requiredString += getOptions().toString();
+        requiredString += ");" + getNewLine();
+        out.add(requiredString);
+        return out;
+    }
+
+    public BlueImpUploadButtonBar<?> addButtonBar()
+    {
+        BlueImpUploadButtonBar<?> bar = new BlueImpUploadButtonBar<>();
+        add(bar);
+        return bar;
+    }
+
+    public BlueImpFileUploadTable<?> addDisplayTable()
+    {
+        BlueImpFileUploadTable<?> bar = new BlueImpFileUploadTable<>();
+        bar.addClass("table table-striped");
+        bar.addAttribute("role", "presentation");
+        bar.add(new TableBodyGroup<>().addClass("files"));
+        add(bar);
+        return bar;
+    }
+
+    @Override
+    public BlueImpFileUploadOptions<?> getOptions()
+    {
+        if (options == null)
+        {
+            options = new BlueImpFileUploadOptions<>();
+        }
+        return options;
+    }
+
+    @Override
+    public void init()
+    { /*if(uploadTemplate)
 		add(new Paragraph<>("<!-- The template to display files available for upload -->\n" +
 		                    "    <script id=\"template-upload\" type=\"text/x-tmpl\">\n" +
 		                    "      {% for (var i=0, file; file=o.files[i]; i++) { %}\n" +
@@ -171,40 +170,40 @@ public class BlueImpUploadForm<J extends BlueImpUploadForm<J>>
 					"          </tr>\n" +
 					"      {% } %}\n" +
 					"    </script>").setTextOnly(true));*/
-	//	}
-		super.init();
-	}
-	
-	public String getCollectorName()
-	{
-		return collectorName;
-	}
-	
-	public boolean isUploadTemplate()
-	{
-		return uploadTemplate;
-	}
-	
-	public BlueImpUploadForm<J> setUploadTemplate(boolean uploadTemplate)
-	{
-		this.uploadTemplate = uploadTemplate;
-		return this;
-	}
-	
-	public boolean isDownloadTemplate()
-	{
-		return downloadTemplate;
-	}
-	
-	public BlueImpUploadForm<J> setDownloadTemplate(boolean downloadTemplate)
-	{
-		this.downloadTemplate = downloadTemplate;
-		return this;
-	}
-	
-	public BlueImpUploadForm<J> setOptions(BlueImpFileUploadOptions<?> options)
-	{
-		this.options = options;
-		return this;
-	}
+        //	}
+        super.init();
+    }
+
+    public String getCollectorName()
+    {
+        return collectorName;
+    }
+
+    public boolean isUploadTemplate()
+    {
+        return uploadTemplate;
+    }
+
+    public BlueImpUploadForm<J> setUploadTemplate(boolean uploadTemplate)
+    {
+        this.uploadTemplate = uploadTemplate;
+        return this;
+    }
+
+    public boolean isDownloadTemplate()
+    {
+        return downloadTemplate;
+    }
+
+    public BlueImpUploadForm<J> setDownloadTemplate(boolean downloadTemplate)
+    {
+        this.downloadTemplate = downloadTemplate;
+        return this;
+    }
+
+    public BlueImpUploadForm<J> setOptions(BlueImpFileUploadOptions<?> options)
+    {
+        this.options = options;
+        return this;
+    }
 }

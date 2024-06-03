@@ -1,4 +1,3 @@
-import com.guicedee.guicedinjection.interfaces.IGuiceModule;
 import com.jwebmp.plugins.blueimp.fileupload.implementations.BlueImpFileUploadInclusionModule;
 import com.jwebmp.plugins.blueimp.fileupload.intercepters.*;
 
@@ -12,7 +11,6 @@ module com.jwebmp.plugins.blueimp.fileupload {
     exports com.jwebmp.plugins.blueimp.fileupload.parts.json;
 
     requires org.apache.commons.io;
-    requires org.apache.commons.fileupload;
 
     requires guiced.vertx;
 
@@ -35,8 +33,6 @@ module com.jwebmp.plugins.blueimp.fileupload {
     uses OnThumbnailFileInterceptor;
 
     provides com.jwebmp.core.services.IPageConfigurator with com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadPageConfigurator;
-
-    provides IGuiceModule with com.jwebmp.plugins.blueimp.fileupload.BlueImpFileUploadBinderGuiceSiteBinder;
 
     provides com.guicedee.guicedinjection.interfaces.IGuiceScanModuleInclusions with BlueImpFileUploadInclusionModule;
 
