@@ -84,7 +84,7 @@ public class BlueImpUploadForm<J extends BlueImpUploadForm<J>>
     }
 
     @Override
-    public void init()
+    protected void init()
     { /*if(uploadTemplate)
 		add(new Paragraph<>("<!-- The template to display files available for upload -->\n" +
 		                    "    <script id=\"template-upload\" type=\"text/x-tmpl\">\n" +
