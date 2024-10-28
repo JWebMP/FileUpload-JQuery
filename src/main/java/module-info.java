@@ -24,7 +24,7 @@ module com.jwebmp.plugins.blueimp.fileupload {
 
     requires com.jwebmp.client;
     requires com.jwebmp.core;
-    requires io.vertx;
+    requires io.vertx.core;
 
     uses OnDeleteFileInterceptor;
     uses OnFileUploadInterceptor;
