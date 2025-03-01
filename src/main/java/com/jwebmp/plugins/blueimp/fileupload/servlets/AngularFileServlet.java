@@ -21,7 +21,7 @@ import com.google.common.base.Strings;
 import com.google.inject.Singleton;
 import com.guicedee.client.IGuiceContext;
 import com.guicedee.guicedinjection.pairing.Pair;
-import com.guicedee.vertx.spi.VertxRouterConfigurator;
+import com.guicedee.vertx.web.spi.VertxRouterConfigurator;
 import com.jwebmp.plugins.blueimp.fileupload.intercepters.OnDeleteFileInterceptor;
 import com.jwebmp.plugins.blueimp.fileupload.intercepters.OnFileUploadInterceptor;
 import com.jwebmp.plugins.blueimp.fileupload.intercepters.OnGetFileInterceptor;
@@ -68,25 +68,24 @@ public class AngularFileServlet
     private void processGetFile(RoutingContext context)
     {
         String filename = context.request()
-                                 .getParam(AngularFileServlet.getFileMethod);
+                .getParam(AngularFileServlet.getFileMethod);
         Set<OnGetFileInterceptor> intercepters = IGuiceContext.loaderToSet(ServiceLoader.load(OnGetFileInterceptor.class));
         if (intercepters.isEmpty())
         {
             AngularFileServlet.log.warning(
                     "There are no file getter interceptors to catch this file get. Create a class that implements " + "OnGetFileInterceptor to deliver this file.");
-        }
-        else
+        } else
         {
             for (OnGetFileInterceptor a : intercepters)
             {
                 String namedCollector = context.request()
-                                               .getParam("uploadCollectorName");
+                        .getParam("uploadCollectorName");
                 if (Strings.isNullOrEmpty(namedCollector))
                 {
                     namedCollector = "";
                 }
                 if (a.name()
-                     .equals(namedCollector))
+                        .equals(namedCollector))
                 {
                     Pair<String, InputStream> is = a.onGetFile(filename);
                     // String mimeType = new Tika().detect(is.getKey());
@@ -101,14 +100,12 @@ public class AngularFileServlet
                         {
                             IOUtils.copyLarge(is.getValue(), fos);
                             context.response()
-                                   .sendFile(tempFile.getAbsolutePath());
-                        }
-                        catch (Exception e)
+                                    .sendFile(tempFile.getAbsolutePath());
+                        } catch (Exception e)
                         {
                             throw new RuntimeException(e);
                         }
-                    }
-                    catch (Exception e)
+                    } catch (Exception e)
                     {
                         AngularFileServlet.log.log(Level.SEVERE, "Unable to deliver file when input stream is transferred to output stream", e);
                     }
@@ -120,26 +117,25 @@ public class AngularFileServlet
     private void processDeleteFile(RoutingContext request)
     {
         String filename = request.request()
-                                 .getParam(AngularFileServlet.deleteFileMethod);
+                .getParam(AngularFileServlet.deleteFileMethod);
 
         Set<OnDeleteFileInterceptor> intercepters = IGuiceContext.loaderToSet(ServiceLoader.load(OnDeleteFileInterceptor.class));
         if (intercepters.isEmpty())
         {
             AngularFileServlet.log.warning(
                     "There are no file delete interceptors to catch this file delete. Create a class that implements " + "OnDeleteFileInterceptor to delete this file.");
-        }
-        else
+        } else
         {
             for (OnDeleteFileInterceptor a : intercepters)
             {
                 String namedCollector = request.request()
-                                               .getParam("uploadCollectorName");
+                        .getParam("uploadCollectorName");
                 if (Strings.isNullOrEmpty(namedCollector))
                 {
                     namedCollector = "";
                 }
                 if (a.name()
-                     .equals(namedCollector))
+                        .equals(namedCollector))
                 {
                     a.onDeleteFile(filename);
                 }
@@ -151,7 +147,7 @@ public class AngularFileServlet
     private void processGetThumb(RoutingContext context)
     {
         String filename = context.request()
-                                 .getParam(AngularFileServlet.getThumbMethod);
+                .getParam(AngularFileServlet.getThumbMethod);
 
         Set<OnThumbnailFileInterceptor> intercepters = IGuiceContext.loaderToSet(ServiceLoader.load(OnThumbnailFileInterceptor.class));
         if (intercepters.isEmpty())
@@ -159,19 +155,18 @@ public class AngularFileServlet
             AngularFileServlet.log.warning(
                     "There are no file get thumbnail interceptors to catch this file thumbnail. Create a class that implements " +
                             "OnThumbnailFileInterceptor to deliver the thumbnail.");
-        }
-        else
+        } else
         {
             for (OnThumbnailFileInterceptor<?> a : intercepters)
             {
                 String namedCollector = context.request()
-                                               .getParam("uploadCollectorName");
+                        .getParam("uploadCollectorName");
                 if (Strings.isNullOrEmpty(namedCollector))
                 {
                     namedCollector = "";
                 }
                 if (a.name()
-                     .equals(namedCollector))
+                        .equals(namedCollector))
                 {
                     Pair<String, InputStream> is = a.onThumbnailGet(filename);
                     if (is == null)
@@ -187,14 +182,12 @@ public class AngularFileServlet
                         {
                             IOUtils.copyLarge(is.getValue(), fos);
                             context.response()
-                                   .sendFile(tempFile.getAbsolutePath());
-                        }
-                        catch (Exception e)
+                                    .sendFile(tempFile.getAbsolutePath());
+                        } catch (Exception e)
                         {
                             throw new RuntimeException(e);
                         }
-                    }
-                    catch (Exception e)
+                    } catch (Exception e)
                     {
                         AngularFileServlet.log.log(Level.SEVERE, "Unable to deliver file when input stream is transferred to output stream", e);
                     }
@@ -208,94 +201,90 @@ public class AngularFileServlet
     public Router builder(Router router)
     {
         Route handler = router.post("/blueimpangularfileupload")
-                              .handler(BodyHandler.create(true)
-                                                  .setUploadsDirectory("uploads")
-                                                  .setDeleteUploadedFilesOnEnd(true));
+                .handler(BodyHandler.create(true)
+                        .setUploadsDirectory("uploads")
+                        .setDeleteUploadedFilesOnEnd(true));
         // handle the form
         router.post("/blueimpangularfileupload")
-              .handler(ctx -> {
-                  ctx.response()
-                     .setChunked(true);
-                  // in your example you only handle 1 file upload, here you can handle
-                  // any number of uploads
-                  for (FileUpload f : ctx.fileUploads())
-                  {
-                      // do whatever you need to do with the file (it is already saved
-                      // on the directory you wanted...
-                      System.out.println("Filename: " + f.fileName());
-                      System.out.println("Size: " + f.size());
+                .handler(ctx -> {
+                    ctx.response()
+                            .setChunked(true);
+                    // in your example you only handle 1 file upload, here you can handle
+                    // any number of uploads
+                    for (FileUpload f : ctx.fileUploads())
+                    {
+                        // do whatever you need to do with the file (it is already saved
+                        // on the directory you wanted...
+                        System.out.println("Filename: " + f.fileName());
+                        System.out.println("Size: " + f.size());
 
-                      JsonFile file = new JsonFile();
-                      file.setName(f.fileName());
-                      file.setSize(f.size());
-                      try (FileInputStream fis = new FileInputStream(f.uploadedFileName()))
-                      {
-                          file.setContent(IOUtils.toBufferedInputStream(fis));
-                      }
-                      catch (Exception e)
-                      {
-                          throw new RuntimeException(e);
-                      }
+                        JsonFile file = new JsonFile();
+                        file.setName(f.fileName());
+                        file.setSize(f.size());
+                        try (FileInputStream fis = new FileInputStream(f.uploadedFileName()))
+                        {
+                            file.setContent(IOUtils.toBufferedInputStream(fis));
+                        } catch (Exception e)
+                        {
+                            throw new RuntimeException(e);
+                        }
 
-                      String uploadCollectorName = ctx.request()
-                                                      .getParam("uploadCollectorName");
+                        String uploadCollectorName = ctx.request()
+                                .getParam("uploadCollectorName");
 
-                      file.setDownloadUrl(ctx.request()
-                                             .uri() + "?getfile=" + f.name() + "&uploadCollectorName=" + uploadCollectorName);
-                      file.setThumbnailUrl(ctx.request()
-                                              .uri() + "?getthumb=" + f.name() + "&uploadCollectorName=" + uploadCollectorName);
-                      file.setDeleteUrl(ctx.request()
-                                           .uri() + "?delfile=" + f.name() + "&uploadCollectorName=" + uploadCollectorName);
+                        file.setDownloadUrl(ctx.request()
+                                .uri() + "?getfile=" + f.name() + "&uploadCollectorName=" + uploadCollectorName);
+                        file.setThumbnailUrl(ctx.request()
+                                .uri() + "?getthumb=" + f.name() + "&uploadCollectorName=" + uploadCollectorName);
+                        file.setDeleteUrl(ctx.request()
+                                .uri() + "?delfile=" + f.name() + "&uploadCollectorName=" + uploadCollectorName);
 
-                      Set<OnFileUploadInterceptor> intercepters = IGuiceContext.loaderToSet(ServiceLoader.load(OnFileUploadInterceptor.class));
-                      if (intercepters.isEmpty())
-                      {
-                          AngularFileServlet.log.warning(
-                                  "There are no file upload interceptors to catch this file upload. Create a class that implements " + "OnFileUploadInterceptor to use this file.");
-                      }
-                      else
-                      {
-                          for (OnFileUploadInterceptor a : intercepters)
-                          {
-                              if (Strings.isNullOrEmpty(uploadCollectorName))
-                              {
-                                  uploadCollectorName = "";
-                              }
-                              if (a.name()
-                                   .equals(uploadCollectorName))
-                              {
-                                  a.onUploadCompleted(file);
-                              }
-                          }
-                      }
+                        Set<OnFileUploadInterceptor> intercepters = IGuiceContext.loaderToSet(ServiceLoader.load(OnFileUploadInterceptor.class));
+                        if (intercepters.isEmpty())
+                        {
+                            AngularFileServlet.log.warning(
+                                    "There are no file upload interceptors to catch this file upload. Create a class that implements " + "OnFileUploadInterceptor to use this file.");
+                        } else
+                        {
+                            for (OnFileUploadInterceptor a : intercepters)
+                            {
+                                if (Strings.isNullOrEmpty(uploadCollectorName))
+                                {
+                                    uploadCollectorName = "";
+                                }
+                                if (a.name()
+                                        .equals(uploadCollectorName))
+                                {
+                                    a.onUploadCompleted(file);
+                                }
+                            }
+                        }
 
-                  }
-                  ctx.response()
-                     .end();
-              });
+                    }
+                    ctx.response()
+                            .end();
+                });
         router.get("/blueimpangularfileupload")
-              .handler(ctx -> {
-                  String getfile = ctx.request()
-                                      .getParam(getFileMethod);
-                  String getthumb = ctx.request()
-                                       .getParam(getThumbMethod);
-                  String delfile = ctx.request()
-                                      .getParam(deleteFileMethod);
-                  String uploadCollectorName = ctx.request()
-                                                  .getParam("uploadCollectorName");
-                  if (!Strings.isNullOrEmpty(getfile))
-                  {
-                      processGetFile(ctx);
-                  }
-                  else if (!Strings.isNullOrEmpty(getthumb))
-                  {
-                      processGetThumb(ctx);
-                  }
-                  else if (!Strings.isNullOrEmpty(delfile))
-                  {
-                      processGetThumb(ctx);
-                  }
-              });
+                .handler(ctx -> {
+                    String getfile = ctx.request()
+                            .getParam(getFileMethod);
+                    String getthumb = ctx.request()
+                            .getParam(getThumbMethod);
+                    String delfile = ctx.request()
+                            .getParam(deleteFileMethod);
+                    String uploadCollectorName = ctx.request()
+                            .getParam("uploadCollectorName");
+                    if (!Strings.isNullOrEmpty(getfile))
+                    {
+                        processGetFile(ctx);
+                    } else if (!Strings.isNullOrEmpty(getthumb))
+                    {
+                        processGetThumb(ctx);
+                    } else if (!Strings.isNullOrEmpty(delfile))
+                    {
+                        processGetThumb(ctx);
+                    }
+                });
         return router;
     }
 }

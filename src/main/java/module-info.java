@@ -12,7 +12,7 @@ module com.jwebmp.plugins.blueimp.fileupload {
 
     requires org.apache.commons.io;
 
-    requires com.guicedee.vertx;
+    requires com.guicedee.vertx.web;
 
     requires static lombok;
 
